@@ -3,15 +3,19 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:SweetsSearchPictureBook"
         mc:Ignorable="d"
-        Title="Window1" Height="603.97" Width="1070.948">
-    <Grid>
+        Title="Window1" Height="812.47" Width="1450.948" Loaded="Window_Loaded">
+    <Window.Background>
+        <ImageBrush ImageSource="29277.jpg"/>
+    </Window.Background>
+    <Grid Height="781" VerticalAlignment="Top" HorizontalAlignment="Right" Width="1443">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="253*"/>
             <ColumnDefinition Width="810*"/>
         </Grid.ColumnDefinitions>
-        <ScrollViewer BorderBrush="Black" BorderThickness="0,1,1,1" Background="White"  HorizontalAlignment="Left" Height="432" Margin="0,131,0,0" VerticalAlignment="Top" Width="776" Grid.Column="1">
+        <ScrollViewer x:Name="itemScrollViewer" BorderBrush="Black" BorderThickness="5" HorizontalAlignment="Left" Height="573" Margin="250,122,0,0" VerticalAlignment="Top" Width="1183" Grid.ColumnSpan="2" Background="#FFF3D2A3">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -20,148 +24,190 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="180"/>
+                    <RowDefinition Height="220"/>
                     <RowDefinition Height="60"/>
                     <RowDefinition Height="30"/>
                     <RowDefinition Height="30"/>
-                    <RowDefinition Height="180"/>
+                    <RowDefinition Height="220"/>
                     <RowDefinition Height="60"/>
                     <RowDefinition Height="30"/>
                     <RowDefinition Height="30"/>
-                    <RowDefinition Height="180"/>
+                    <RowDefinition Height="220"/>
                     <RowDefinition Height="60"/>
                     <RowDefinition Height="30"/>
                     <RowDefinition Height="30"/>
-                    <RowDefinition Height="180"/>
+                    <RowDefinition Height="220"/>
                     <RowDefinition Height="60"/>
                     <RowDefinition Height="30"/>
                     <RowDefinition Height="30"/>
                 </Grid.RowDefinitions>
 
-                <TextBox HorizontalAlignment="Left" Height="23" Margin="388,202,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-                <Label Content="Label" HorizontalAlignment="Left" Margin="42,119,0,0" VerticalAlignment="Top" Height="35" Width="89" RenderTransformOrigin="0.5,0.5"/>
 
 
-                <Button Grid.Column="0" Grid.Row="0" Background="White">
-                    <Image x:Name="pbItemImage_1" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" Height="160" VerticalAlignment="Top" Width="160" Source="チロル画像.jpg"/>
+                <Button x:Name="btItemUrl_1" Grid.Column="0" Grid.Row="0" Height="Auto" Background="White" BorderBrush="#FFFF9C3A" BorderThickness="10" Click="btItemUrl_1_Click">
+                    <Image x:Name="pbItemImage_1" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" Height="200" VerticalAlignment="Top" Width="200" Source="チロル画像.jpg"/>
                 </Button>
-                <TextBlock x:Name="tbItemName_1" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" Margin="10,4,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="56" Width="131" FontSize="20"/>
-                <TextBlock x:Name="tbItemPrice_1" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Left" Margin="10,4,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="56" Width="131" FontSize="18"/>
+                <TextBlock x:Name="tbItemName_1" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" Margin="10,4,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="56" Width="252" FontSize="20"/>
+                <TextBlock x:Name="tbItemPrice_1" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Left" Margin="10,4,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="56" Width="252" FontSize="18" Grid.RowSpan="2"/>
 
-                <Button Grid.Column="1" Grid.Row="0" Background="White">
-                    <Image x:Name="pbItemImage_2" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" Height="160" VerticalAlignment="Top" Width="160" Source="チロル2.jpg"/>
+                <Button x:Name="btItemUrl_2" Grid.Column="1" Grid.Row="0" Background="White" Height="Auto" BorderBrush="#FFFF9C3A" BorderThickness="10">
+                    <Image x:Name="pbItemImage_2" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" Height="200" VerticalAlignment="Top" Width="200" Source="チロル2.jpg"/>
                 </Button>
-                <TextBlock x:Name="tbItemName_2" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" Margin="10,4,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="56" Width="131" FontSize="20"/>
-                <TextBlock x:Name="tbItemPrice_2" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" Margin="10,4,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="56" Width="131" FontSize="18"/>
+                <TextBlock x:Name="tbItemName_2" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" Margin="10,4,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="56" Width="248" FontSize="20"/>
+                <TextBlock x:Name="tbItemPrice_2" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" Margin="10,4,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="56" Width="248" FontSize="18" Grid.RowSpan="2"/>
 
-                <Button Grid.Column="2" Grid.Row="0" Background="White">
-                    <Image x:Name="pbItemImage_3" Grid.Column="2" Grid.Row="0" HorizontalAlignment="Center" Height="160" VerticalAlignment="Top" Width="160" Source="チロル3.jpg"/>
+                <Button x:Name="btItemUrl_3" Grid.Column="2" Grid.Row="0" Background="White" Height="Auto" BorderBrush="#FFFF9C3A" BorderThickness="10">
+                    <Image x:Name="pbItemImage_3" Grid.Column="2" Grid.Row="0" HorizontalAlignment="Center" Height="200" VerticalAlignment="Top" Width="200" Source="チロル3.jpg"/>
                 </Button>
-                <TextBlock x:Name="tbItemName_3" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Left" Margin="10,4,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="56" Width="131" FontSize="20"/>
-                <TextBlock x:Name="tbItemPrice_3" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Left" Margin="10,4,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="56" Width="131" FontSize="18"/>
+                <TextBlock x:Name="tbItemName_3" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Left" Margin="10,4,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="56" Width="233" FontSize="20"/>
+                <TextBlock x:Name="tbItemPrice_3" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Left" Margin="10,4,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="56" Width="233" FontSize="18" Grid.RowSpan="2"/>
 
-                <Button Grid.Column="3" Grid.Row="0" Background="White">
-                    <Image x:Name="pbItemImage_4" Grid.Column="3" Grid.Row="0" HorizontalAlignment="Center" Height="160" VerticalAlignment="Top" Width="160" Source="チロル4.jpg"/>
+                <Button x:Name="btItemUrl_4" Grid.Column="3" Grid.Row="0" Background="White" Height="Auto" BorderBrush="#FFFF9C3A" BorderThickness="10">
+                    <Image x:Name="pbItemImage_4" Grid.Column="3" Grid.Row="0" HorizontalAlignment="Center" Height="200" VerticalAlignment="Top" Width="200" Source="チロル4.jpg"/>
                 </Button>
-                <TextBlock x:Name="tbItemName_4" Grid.Column="3" Grid.Row="1" HorizontalAlignment="Left" Margin="10,4,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="56" Width="131" FontSize="20"/>
-                <TextBlock x:Name="tbItemPrice_4" Grid.Column="3" Grid.Row="2" HorizontalAlignment="Left" Margin="10,4,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="56" Width="131" FontSize="18"/>
+                <TextBlock x:Name="tbItemName_4" Grid.Column="3" Grid.Row="1" HorizontalAlignment="Left" Margin="10,4,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="56" Width="235" FontSize="20"/>
+                <TextBlock x:Name="tbItemPrice_4" Grid.Column="3" Grid.Row="2" HorizontalAlignment="Left" Margin="10,4,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="56" Width="235" FontSize="18" Grid.RowSpan="2"/>
 
-                <Button Grid.Column="0" Grid.Row="4" Background="White">
-                    <Image x:Name="pbItemImage_5" HorizontalAlignment="Center" Height="160" VerticalAlignment="Top" Width="160" Source="チロル4.jpg"/>
+                <Button x:Name="btItemUrl_5" Grid.Column="0" Grid.Row="4" Background="White" Height="Auto" BorderBrush="#FFFF9C3A" BorderThickness="10">
+                    <Image x:Name="pbItemImage_5" HorizontalAlignment="Center" Height="200" VerticalAlignment="Top" Width="200" Source="チロル4.jpg"/>
                 </Button>
-                <TextBlock x:Name="tbItemName_5" Grid.Column="0" Grid.Row="5" HorizontalAlignment="Left" Margin="10,4,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="56" Width="131" FontSize="20"/>
-                <TextBlock x:Name="tbItemPrice_5" Grid.Column="0" Grid.Row="6" HorizontalAlignment="Left" Margin="10,4,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="56" Width="131" FontSize="18"/>
+                <TextBlock x:Name="tbItemName_5" Grid.Column="0" Grid.Row="5" HorizontalAlignment="Left" Margin="10,4,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="56" Width="228" FontSize="20"/>
+                <TextBlock x:Name="tbItemPrice_5" Grid.Column="0" Grid.Row="6" HorizontalAlignment="Left" Margin="10,4,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="56" Width="228" FontSize="18" Grid.RowSpan="2"/>
 
-                <Button Grid.Column="1" Grid.Row="4" Background="White">
-                    <Image x:Name="pbItemImage_6" HorizontalAlignment="Center" Height="160" VerticalAlignment="Top" Width="160" Source="チロル4.jpg"/>
+                <Button x:Name="btItemUrl_6" Grid.Column="1" Grid.Row="4" Background="White" Height="Auto" BorderBrush="#FFFF9C3A" BorderThickness="10">
+                    <Image x:Name="pbItemImage_6" HorizontalAlignment="Center" Height="200" VerticalAlignment="Top" Width="200" Source="チロル4.jpg"/>
                 </Button>
-                <TextBlock x:Name="tbItemName_6" Grid.Column="1" Grid.Row="5" HorizontalAlignment="Left" Margin="10,4,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="56" Width="131" FontSize="20"/>
-                <TextBlock x:Name="tbItemPrice_6" Grid.Column="1" Grid.Row="6" HorizontalAlignment="Left" Margin="10,4,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="56" Width="131" FontSize="18"/>
+                <TextBlock x:Name="tbItemName_6" Grid.Column="1" Grid.Row="5" HorizontalAlignment="Left" Margin="10,4,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="56" Width="228" FontSize="20"/>
+                <TextBlock x:Name="tbItemPrice_6" Grid.Column="1" Grid.Row="6" HorizontalAlignment="Left" Margin="10,4,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="56" Width="228" FontSize="18" Grid.RowSpan="2"/>
 
-                <Button Grid.Column="2" Grid.Row="4" Background="White">
-                    <Image x:Name="pbItemImage_7" HorizontalAlignment="Center" Height="160" VerticalAlignment="Top" Width="160" Source="チロル4.jpg"/>
+                <Button x:Name="btItemUrl_7" Grid.Column="2" Grid.Row="4" Background="White" Height="Auto" BorderBrush="#FFFF9C3A" BorderThickness="10">
+                    <Image x:Name="pbItemImage_7" HorizontalAlignment="Center" Height="200" VerticalAlignment="Top" Width="200" Source="チロル4.jpg"/>
                 </Button>
-                <TextBlock x:Name="tbItemName_7" Grid.Column="2" Grid.Row="5" HorizontalAlignment="Left" Margin="10,4,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="56" Width="131" FontSize="20"/>
-                <TextBlock x:Name="tbItemPrice_7" Grid.Column="2" Grid.Row="6" HorizontalAlignment="Left" Margin="10,4,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="56" Width="131" FontSize="18"/>
+                <TextBlock x:Name="tbItemName_7" Grid.Column="2" Grid.Row="5" HorizontalAlignment="Left" Margin="10,4,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="56" Width="233" FontSize="20"/>
+                <TextBlock x:Name="tbItemPrice_7" Grid.Column="2" Grid.Row="6" HorizontalAlignment="Left" Margin="10,4,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="56" Width="233" FontSize="18" Grid.RowSpan="2"/>
 
-                <Button Grid.Column="3" Grid.Row="4" Background="White">
-                    <Image x:Name="pbItemImage_8" HorizontalAlignment="Center" Height="160" VerticalAlignment="Top" Width="160" Source="チロル4.jpg"/>
+                <Button x:Name="btItemUrl_8" Grid.Column="3" Grid.Row="4" Background="White" Height="Auto" BorderBrush="#FFFF9C3A" BorderThickness="10">
+                    <Image x:Name="pbItemImage_8" HorizontalAlignment="Center" Height="200" VerticalAlignment="Top" Width="200" Source="チロル4.jpg"/>
                 </Button>
-                <TextBlock x:Name="tbItemName_8" Grid.Column="3" Grid.Row="5" HorizontalAlignment="Left" Margin="10,4,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="56" Width="131" FontSize="20"/>
-                <TextBlock x:Name="tbItemPrice_8" Grid.Column="3" Grid.Row="6" HorizontalAlignment="Left" Margin="10,4,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="56" Width="131" FontSize="18"/>
+                <TextBlock x:Name="tbItemName_8" Grid.Column="3" Grid.Row="5" HorizontalAlignment="Left" Margin="10,4,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="56" Width="235" FontSize="20"/>
+                <TextBlock x:Name="tbItemPrice_8" Grid.Column="3" Grid.Row="6" HorizontalAlignment="Left" Margin="10,4,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="56" Width="235" FontSize="18" Grid.RowSpan="2"/>
 
-                <Button Grid.Column="0" Grid.Row="8" Background="White">
-                    <Image x:Name="pbItemImage_9" HorizontalAlignment="Center" Height="160" VerticalAlignment="Top" Width="160" Source="チロル4.jpg"/>
+                <Button x:Name="btItemUrl_9" Grid.Column="0" Grid.Row="8" Background="White" Height="Auto" BorderBrush="#FFFF9C3A" BorderThickness="10">
+                    <Image x:Name="pbItemImage_9" HorizontalAlignment="Center" Height="200" VerticalAlignment="Top" Width="200" Source="チロル4.jpg"/>
                 </Button>
-                <TextBlock x:Name="tbItemName_9" Grid.Column="0" Grid.Row="9" HorizontalAlignment="Left" Margin="10,4,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="56" Width="131" FontSize="20"/>
-                <TextBlock x:Name="tbItemPrice_9" Grid.Column="0" Grid.Row="10" HorizontalAlignment="Left" Margin="10,4,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="56" Width="131" FontSize="18"/>
+                <TextBlock x:Name="tbItemName_9" Grid.Column="0" Grid.Row="9" HorizontalAlignment="Left" Margin="10,4,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="56" Width="228" FontSize="20"/>
+                <TextBlock x:Name="tbItemPrice_9" Grid.Column="0" Grid.Row="10" HorizontalAlignment="Left" Margin="10,4,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="56" Width="228" FontSize="18" Grid.RowSpan="2"/>
 
-                <Button Grid.Column="1" Grid.Row="8" Background="White">
-                    <Image x:Name="pbItemImage_10" HorizontalAlignment="Center" Height="160" VerticalAlignment="Top" Width="160" Source="チロル4.jpg"/>
+                <Button x:Name="btItemUrl_10" Grid.Column="1" Grid.Row="8" Background="White" Height="Auto" BorderBrush="#FFFF9C3A" BorderThickness="10">
+                    <Image x:Name="pbItemImage_10" HorizontalAlignment="Center" Height="200" VerticalAlignment="Top" Width="200" Source="チロル4.jpg"/>
                 </Button>
-                <TextBlock x:Name="tbItemName_10" Grid.Column="1" Grid.Row="9" HorizontalAlignment="Left" Margin="10,4,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="56" Width="131" FontSize="20"/>
-                <TextBlock x:Name="tbItemPrice_10" Grid.Column="1" Grid.Row="10" HorizontalAlignment="Left" Margin="10,4,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="56" Width="131" FontSize="18"/>
+                <TextBlock x:Name="tbItemName_10" Grid.Column="1" Grid.Row="9" HorizontalAlignment="Left" Margin="10,4,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="56" Width="228" FontSize="20"/>
+                <TextBlock x:Name="tbItemPrice_10" Grid.Column="1" Grid.Row="10" HorizontalAlignment="Left" Margin="10,4,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="56" Width="228" FontSize="18" Grid.RowSpan="2"/>
 
-                <Button Grid.Column="2" Grid.Row="8" Background="White">
-                    <Image x:Name="pbItemImage_11" HorizontalAlignment="Center" Height="160" VerticalAlignment="Top" Width="160" Source="チロル4.jpg"/>
+                <Button x:Name="btItemUrl_11" Grid.Column="2" Grid.Row="8" Background="White" Height="Auto" BorderBrush="#FFFF9C3A" BorderThickness="10">
+                    <Image x:Name="pbItemImage_11" HorizontalAlignment="Center" Height="200" VerticalAlignment="Top" Width="200" Source="チロル4.jpg"/>
                 </Button>
-                <TextBlock x:Name="tbItemName_11" Grid.Column="2" Grid.Row="9" HorizontalAlignment="Left" Margin="10,4,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="56" Width="131" FontSize="20"/>
-                <TextBlock x:Name="tbItemPrice_11" Grid.Column="2" Grid.Row="10" HorizontalAlignment="Left" Margin="10,4,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="56" Width="131" FontSize="18"/>
+                <TextBlock x:Name="tbItemName_11" Grid.Column="2" Grid.Row="9" HorizontalAlignment="Left" Margin="10,4,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="56" Width="233" FontSize="20"/>
+                <TextBlock x:Name="tbItemPrice_11" Grid.Column="2" Grid.Row="10" HorizontalAlignment="Left" Margin="10,4,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="56" Width="233" FontSize="18" Grid.RowSpan="2"/>
 
-                <Button Grid.Column="3" Grid.Row="8" Background="White">
-                    <Image x:Name="pbItemImage_12" HorizontalAlignment="Center" Height="160" VerticalAlignment="Top" Width="160" Source="チロル4.jpg"/>
+                <Button x:Name="btItemUrl_12" Grid.Column="3" Grid.Row="8" Background="White" Height="Auto" BorderBrush="#FFFF9C3A" BorderThickness="10">
+                    <Image x:Name="pbItemImage_12" HorizontalAlignment="Center" Height="200" VerticalAlignment="Top" Width="200" Source="チロル4.jpg"/>
                 </Button>
-                <TextBlock x:Name="tbItemName_12" Grid.Column="3" Grid.Row="9" HorizontalAlignment="Left" Margin="10,4,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="56" Width="131" FontSize="20"/>
-                <TextBlock x:Name="tbItemPrice_12" Grid.Column="3" Grid.Row="10" HorizontalAlignment="Left" Margin="10,4,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="56" Width="131" FontSize="18"/>
+                <TextBlock x:Name="tbItemName_12" Grid.Column="3" Grid.Row="9" HorizontalAlignment="Left" Margin="10,4,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="56" Width="235" FontSize="20"/>
+                <TextBlock x:Name="tbItemPrice_12" Grid.Column="3" Grid.Row="10" HorizontalAlignment="Left" Margin="10,4,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="56" Width="235" FontSize="18" Grid.RowSpan="2"/>
 
-
-                <Button Grid.Column="0" Grid.Row="12" Background="White">
-                    <Image x:Name="pbItemImage_13" HorizontalAlignment="Center" Height="160" VerticalAlignment="Top" Width="160" Source="チロル4.jpg"/>
+                <Button x:Name="btItemUrl_13" Grid.Column="0" Grid.Row="12" Background="White" Height="Auto" BorderBrush="#FFFF9C3A" BorderThickness="10">
+                    <Image x:Name="pbItemImage_13" HorizontalAlignment="Center" Height="200" VerticalAlignment="Top" Width="200" Source="チロル4.jpg"/>
                 </Button>
-                <TextBlock x:Name="tbItemName_13" Grid.Column="0" Grid.Row="13" HorizontalAlignment="Left" Margin="10,4,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="56" Width="131" FontSize="20"/>
-                <TextBlock x:Name="tbItemPrice_13" Grid.Column="0" Grid.Row="14" HorizontalAlignment="Left" Margin="10,4,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="56" Width="131" FontSize="18"/>
+                <TextBlock x:Name="tbItemName_13" Grid.Column="0" Grid.Row="13" HorizontalAlignment="Left" Margin="10,4,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="56" Width="228" FontSize="20"/>
+                <TextBlock x:Name="tbItemPrice_13" Grid.Column="0" Grid.Row="14" HorizontalAlignment="Left" Margin="10,4,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="56" Width="228" FontSize="18" Grid.RowSpan="2"/>
 
-                <Button Grid.Column="1" Grid.Row="12" Background="White">
-                    <Image x:Name="pbItemImage_14" HorizontalAlignment="Center" Height="160" VerticalAlignment="Top" Width="160" Source="チロル4.jpg"/>
+                <Button x:Name="btItemUrl_14" Grid.Column="1" Grid.Row="12" Background="White" Height="Auto" BorderBrush="#FFFF9C3A" BorderThickness="10">
+                    <Image x:Name="pbItemImage_14" HorizontalAlignment="Center" Height="200" VerticalAlignment="Top" Width="200" Source="チロル4.jpg"/>
                 </Button>
-                <TextBlock x:Name="tbItemName_14" Grid.Column="1" Grid.Row="13" HorizontalAlignment="Left" Margin="10,4,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="56" Width="131" FontSize="20"/>
-                <TextBlock x:Name="tbItemPrice_14" Grid.Column="1" Grid.Row="14" HorizontalAlignment="Left" Margin="10,4,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="56" Width="131" FontSize="18"/>
+                <TextBlock x:Name="tbItemName_14" Grid.Column="1" Grid.Row="13" HorizontalAlignment="Left" Margin="10,4,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="56" Width="228" FontSize="20"/>
+                <TextBlock x:Name="tbItemPrice_14" Grid.Column="1" Grid.Row="14" HorizontalAlignment="Left" Margin="10,4,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="56" Width="228" FontSize="18" Grid.RowSpan="2"/>
 
-                <Button Grid.Column="2" Grid.Row="12" Background="White">
-                    <Image x:Name="pbItemImage_15" HorizontalAlignment="Center" Height="160" VerticalAlignment="Top" Width="160" Source="チロル4.jpg"/>
+                <Button x:Name="btItemUrl_15" Grid.Column="2" Grid.Row="12" Background="White" Height="Auto" BorderBrush="#FFFF9C3A" BorderThickness="10">
+                    <Image x:Name="pbItemImage_15" HorizontalAlignment="Center" Height="200" VerticalAlignment="Top" Width="200" Source="チロル4.jpg"/>
                 </Button>
-                <TextBlock x:Name="tbItemName_15" Grid.Column="2" Grid.Row="13" HorizontalAlignment="Left" Margin="10,4,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="56" Width="131" FontSize="20"/>
-                <TextBlock x:Name="tbItemPrice_15" Grid.Column="2" Grid.Row="14" HorizontalAlignment="Left" Margin="10,4,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="56" Width="131" FontSize="18"/>
+                <TextBlock x:Name="tbItemName_15" Grid.Column="2" Grid.Row="13" HorizontalAlignment="Left" Margin="10,4,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="56" Width="233" FontSize="20"/>
+                <TextBlock x:Name="tbItemPrice_15" Grid.Column="2" Grid.Row="14" HorizontalAlignment="Left" Margin="10,4,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="56" Width="233" FontSize="18" Grid.RowSpan="2"/>
 
-                <Button Grid.Column="3" Grid.Row="12" Background="White">
-                    <Image x:Name="pbItemImage_16" HorizontalAlignment="Center" Height="160" VerticalAlignment="Top" Width="160" Source="チロル4.jpg"/>
+                <Button x:Name="btItemUrl_16" Grid.Column="3" Grid.Row="12" Background="White" Height="Auto" BorderBrush="#FFFF9C3A" BorderThickness="10">
+                    <Image x:Name="pbItemImage_16" HorizontalAlignment="Center" Height="200" VerticalAlignment="Top" Width="200" Source="チロル4.jpg"/>
                 </Button>
-                <TextBlock x:Name="tbItemName_16" Grid.Column="3" Grid.Row="13" HorizontalAlignment="Left" Margin="10,4,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="56" Width="131" FontSize="20"/>
-                <TextBlock x:Name="tbItemPrice_16" Grid.Column="3" Grid.Row="14" HorizontalAlignment="Left" Margin="10,4,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="56" Width="131" FontSize="18"/>
-
-
-
+                <TextBlock x:Name="tbItemName_16" Grid.Column="3" Grid.Row="13" HorizontalAlignment="Left" Margin="10,4,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="56" Width="235" FontSize="20"/>
+                <TextBlock x:Name="tbItemPrice_16" Grid.Column="3" Grid.Row="14" HorizontalAlignment="Left" Margin="10,4,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="56" Width="235" FontSize="18" Grid.RowSpan="2"/>
 
             </Grid>
         </ScrollViewer>
-        <Label Content="フリーキーワード検索" HorizontalAlignment="Left" Margin="19,19,0,0" VerticalAlignment="Top" Height="46" Width="247" FontSize="30" Grid.Column="1"/>
-        <TextBox x:Name="tbFreeWord" BorderBrush="Black" BorderThickness="2" HorizontalAlignment="Left" Height="41" Margin="151,70,0,0" TextWrapping="Wrap" Text="テキストボックス" VerticalAlignment="Top" Width="487" FontSize="30" Grid.Column="1" Background="White"/>
-        <Button x:Name="Search" Content="検索" HorizontalAlignment="Left" Margin="670,70,0,0" VerticalAlignment="Top" Width="81" Height="41" FontSize="30" Grid.Column="1" Click="Search_Click"/>
-        <Border Background="Black" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="573" VerticalAlignment="Top" Width="1" RenderTransformOrigin="0.5,0.5" Margin="244,0,0,0"/>
+
+        <Label Content="フリーキーワード検索" FontSize="35" FontWeight="ExtraBlack" BorderBrush="Black" HorizontalAlignment="Center" BorderThickness="4" Margin="175,10,984,708" Background="White" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="tbFreeWord" BorderBrush="Black" BorderThickness="2" HorizontalAlignment="Left" Height="45" Margin="121,46,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="504" FontSize="30" Grid.Column="1" Background="White"
+                 materialDesign:HintAssist.Hint="お菓子の名前"/>
+        <Button x:Name="Search" HorizontalAlignment="Left" Margin="638,44,0,0" VerticalAlignment="Top" Width="150" Height="47" FontSize="30" Grid.Column="1" Click="Search_Click" BorderBrush="Black">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <GradientStop Color="#FF786565" Offset="1"/>
+                    <GradientStop Color="#FFBBBBBB"/>
+                </LinearGradientBrush>
+            </Button.Background>
+            <Label Content="検索" Margin="40,-10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="58" Width="110" FontSize="38" Foreground="#DDFFFFFF" />
+        </Button>
+        <materialDesign:PackIcon Kind="Search" Height="56" Width="59" Grid.Column="1" Margin="635,42,0,0"/>
 
         <Label Content="分類：" HorizontalAlignment="Left" Margin="10,101,0,0" VerticalAlignment="Top" FontSize="25" Height="41" Width="79"/>
         <Label Content="メーカー：" HorizontalAlignment="Left" Margin="10,198,0,0" VerticalAlignment="Top" FontSize="22" Height="39" Width="92"/>
         <Label Content="地域限定：" HorizontalAlignment="Left" Margin="10,298,0,0" VerticalAlignment="Top" FontSize="22" Height="39" Width="120"/>
-        <ComboBox Name="cbClass" HorizontalAlignment="Left" Margin="53,142,0,0" VerticalAlignment="Top" Width="151" Height="22"/>
-        <ComboBox Name="cbMaker" HorizontalAlignment="Left" Margin="53,237,0,0" VerticalAlignment="Top" Width="151" Height="22"/>
-        <ComboBox HorizontalAlignment="Left" Margin="53,337,0,0" VerticalAlignment="Top" Width="151" Height="22"/>
+        <ComboBox Name="cbClass" SelectedIndex="0" HorizontalAlignment="Left" Margin="53,142,0,0" VerticalAlignment="Top" Width="151" Height="32" FontSize="20">
+            <ComboBoxItem Content="すべて"/>
+            <ComboBoxItem Content="スナック"/>
+            <ComboBoxItem Content="チョコレート"/>
+            <ComboBoxItem Content="クッキー・洋菓子"/>
+            <ComboBoxItem Content="飴・ガム"/>
+            <ComboBoxItem Content="せんべい・和風"/>
+        </ComboBox>
+        <ComboBox Name="cbMaker" SelectedIndex="0" HorizontalAlignment="Left" Margin="53,237,0,0" VerticalAlignment="Top" Width="151" Height="32" FontSize="20">
+            <ComboBoxItem Content="すべて"/>
+            <ComboBoxItem Content="サッポロ"/>
+            <ComboBoxItem Content="チロルチョコ"/>
+            <ComboBoxItem Content="不二家"/>
+            <ComboBoxItem Content="カバヤ"/>
+            <ComboBoxItem Content="ロッテ"/>
+            <ComboBoxItem Content="明治製菓"/>
+            <ComboBoxItem Content="亀田製菓"/>
+            <ComboBoxItem Content="森永"/>
+            <ComboBoxItem Content="おやつカンパニー"/>
+            <ComboBoxItem Content="カルビー"/>
+            <ComboBoxItem Content="ハウス"/>
+            <ComboBoxItem Content="東ハト"/>
+            <ComboBoxItem Content="グリコ"/>
+            <ComboBoxItem Content="ネスレ"/>
+            <ComboBoxItem Content="エスビー"/>
+            <ComboBoxItem Content="フルタ"/>
+            <ComboBoxItem Content="ギンビス"/>
+            <ComboBoxItem Content="ブルボン"/>
+            <ComboBoxItem Content="ヤマヨシ"/>
+            <ComboBoxItem Content="UHA味覚糖"/>
+            <ComboBoxItem Content="湖池屋"/>
+            <ComboBoxItem Content="日清シスコ"/>
+        </ComboBox>
+        <ComboBox HorizontalAlignment="Left" SelectedIndex="0" Margin="53,337,0,0" VerticalAlignment="Top" Width="151" Height="32" FontSize="20">
+            <ComboBoxItem Content="指定なし"/>
+        </ComboBox>
         <Label Content="価格：" HorizontalAlignment="Left" Margin="13,414,0,0" VerticalAlignment="Top" FontSize="22" Height="39" Width="76"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="39,452,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="50"/>
-        <Label Content="～" HorizontalAlignment="Left" Margin="111,452,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.041,0.496" Height="26" Width="22"/>
-        <Label Content="円" HorizontalAlignment="Left" Margin="89,452,0,0" VerticalAlignment="Top" Height="26" Width="22"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="138,455,0,0" TextWrapping="Wrap" Text="500" VerticalAlignment="Top" Width="62"/>
-        <Label Content="円" HorizontalAlignment="Left" Margin="205,455,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.756,0.466" Height="26" Width="22"/>
-        <Border Background="Black" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="1" Margin="244,125,-32,0" VerticalAlignment="Top" Width="851" Grid.ColumnSpan="2"/>
+        <TextBox HorizontalAlignment="Left" Height="26" Margin="37,458,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="47" FontSize="15"/>
+        <Label Content="～" HorizontalAlignment="Left" Margin="106,467,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.041,0.496" Height="35" Width="24"/>
+        <Label Content="円" HorizontalAlignment="Left" Margin="84,467,0,0" VerticalAlignment="Top" Height="35" Width="23"/>
+        <TextBox HorizontalAlignment="Left" Height="26" Margin="136,458,0,0" TextWrapping="Wrap" Text="500" VerticalAlignment="Top" Width="65" FontSize="15"/>
+        <Label Content="円" HorizontalAlignment="Left" Margin="201,467,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.756,0.466" Height="35" Width="23"/>
+
+        <Button
+            Style="{StaticResource MaterialDesignFloatingActionLightButton}" Grid.Column="1" Margin="826,35,217,690" Click="button_Infomation" Width="Auto" Height="Auto" Background="#FFCBCBCB">
+            <materialDesign:PackIcon Kind="AlertCircleOutline" Width="50" Height="50"/>
+        </Button>
+
 
     </Grid>
 </Window>

@@ -83,9 +83,16 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Class1.cs" />
+    <Compile Include="ItemWindow.xaml.cs">
+      <DependentUpon>ItemWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Window1.xaml.cs">
       <DependentUpon>Window1.xaml</DependentUpon>
     </Compile>
+    <Page Include="ItemWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -165,6 +172,18 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="チョコ垂れてる.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="29277.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ポテチ　いらすとや.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ecalbt014_002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="チョコ　欠けてる　メインメニュー.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.6.1\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.6.1\build\MaterialDesignThemes.targets')" />

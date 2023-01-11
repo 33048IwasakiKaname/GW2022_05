@@ -31,12 +31,7 @@ namespace SweetsSearchPictureBook
             Window1 win1 = new Window1();
             win1.Show();
             //win1.Topmost = true;
-            //this.IsEnabled = false;
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
+            //IsEnabled = false;
         }
     }
 }

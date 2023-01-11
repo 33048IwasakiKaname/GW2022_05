@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace SweetsSearchPictureBook
 {
 
+
     public class Rootobject
     {
         public Item[] item { get; set; }
@@ -18,8 +19,8 @@ namespace SweetsSearchPictureBook
     {
         public string id { get; set; }
         public string name { get; set; }
-        public object kana { get; set; }
-        public string maker { get; set; }
+        public Kana kana { get; set; }
+        public object maker { get; set; }
         public object price { get; set; }
         public string type { get; set; }
         public string regist { get; set; }
@@ -30,9 +31,15 @@ namespace SweetsSearchPictureBook
         public string area { get; set; }
     }
 
+    public class Kana
+    {
+        public object kana { get; set; }
+    }
+
     public class Tags
     {
         public object tag { get; set; }
     }
+
 
 }
