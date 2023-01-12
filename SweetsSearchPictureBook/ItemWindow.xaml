@@ -5,9 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SweetsSearchPictureBook"
         mc:Ignorable="d"
-        Title="ItemWindow" Height="450" Width="800" Loaded="Window_Loaded">
+        Title="ItemWindow" Height="382.737" Width="575.474" Loaded="ItemWindow_Loaded" Closing="ItemWindow_Closing">
     <Grid>
-        <Image x:Name="itemImage" HorizontalAlignment="Left" Height="220" Margin="418,99,0,0" VerticalAlignment="Top" Width="274"/>
+        <Image x:Name="itemImage" HorizontalAlignment="Left" Height="223" Margin="302,98,0,0" VerticalAlignment="Top" Width="231" Source="チロル3.jpg"/>
+        <TextBlock x:Name="snackName" Text="お菓子の名前" HorizontalAlignment="Left" Margin="10,23,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="70" Width="331" FontSize="30"/>
+        <Label Content="メーカー" HorizontalAlignment="Left" Margin="31,139,0,0" VerticalAlignment="Top" Height="33" Width="103" FontSize="20"/>
+        <Label Content="種類" HorizontalAlignment="Left" Margin="31,179,0,0" VerticalAlignment="Top" FontSize="20"/>
+        <Label Content="キーワード" HorizontalAlignment="Left" Margin="29,219,0,0" VerticalAlignment="Top" FontSize="20"/>
+        <Label Content="値段" HorizontalAlignment="Left" Margin="31,261,0,0" VerticalAlignment="Top" FontSize="20"/>
+        <Label Name="itemMaker" Content="明治製菓" HorizontalAlignment="Left" Margin="139,139,0,0" VerticalAlignment="Top" FontSize="20"/>
+        <Label Name="itemType" Content="チョコレート" HorizontalAlignment="Left" Margin="137,179,0,0" VerticalAlignment="Top" FontSize="20"/>
+        <Label Name="itemKeyword" Content="いちご、フラン" HorizontalAlignment="Left" Margin="137,219,0,0" VerticalAlignment="Top" FontSize="20"/>
+        <Label Name="itemPrice" Content="100円" HorizontalAlignment="Left" Margin="139,261,0,0" VerticalAlignment="Top" FontSize="20"/>
+        
+
 
     </Grid>
 </Window>

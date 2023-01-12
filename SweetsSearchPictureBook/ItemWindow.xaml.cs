@@ -20,10 +20,8 @@ namespace SweetsSearchPictureBook
     /// </summary>
     public partial class ItemWindow : Window
     {
-
-        public Window1 window1 = new Window1();
         public Rootobject jsonKeyWord = new Rootobject();
-        public string url;
+        public string url,keyword;
         public int num;
 
         public ItemWindow()
@@ -31,12 +29,25 @@ namespace SweetsSearchPictureBook
             InitializeComponent();
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private void ItemWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            jsonKeyWord = JsonConvert.DeserializeObject<Rootobject>(window1.keyWord);
-            url = jsonKeyWord.item[num].url;
+            e.Cancel = true;
+            this.Visibility = Visibility.Collapsed;
+        }
+
+        private void ItemWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            keyword = Window1.keyWord;
+            jsonKeyWord = JsonConvert.DeserializeObject<Rootobject>(keyword);
+            url = jsonKeyWord.item[num].image;
             BitmapImage imageSource = new BitmapImage(new Uri(url));
             itemImage.Source = imageSource;
+
+            snackName.Text = jsonKeyWord.item[num].name;
+            itemMaker.Content = jsonKeyWord.item[num].maker;
+            itemType.Content = jsonKeyWord.item[num].type;
+            itemKeyword.Content = jsonKeyWord.item[num].tags;
+            itemPrice.Content = jsonKeyWord.item[num].price;
         }
     }
 }

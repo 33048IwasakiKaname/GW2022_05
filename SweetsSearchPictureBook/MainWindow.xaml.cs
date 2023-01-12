@@ -33,5 +33,10 @@ namespace SweetsSearchPictureBook
             //win1.Topmost = true;
             //IsEnabled = false;
         }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            
+        }
     }
 }

@@ -23,10 +23,12 @@ namespace SweetsSearchPictureBook
     {
         
         public string url = "https://www.sysbird.jp/webapi/?apikey=guest&format=json&max=16";
-        public string keyWord;
 
         public WebClient wc = new WebClient();
-        public Rootobject jsonKeyWord = new Rootobject();
+        public static Rootobject jsonKeyWord = new Rootobject();
+        public ItemWindow itemWindow = new ItemWindow();
+
+        public static string keyWord;
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -196,16 +198,19 @@ namespace SweetsSearchPictureBook
 
         private void button_Infomation(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("値段が【　{}円　】となる場合がありますがご了承ください");
+            MessageBox.Show("値段が {}円 となる場合がありますがご了承ください");
         }
 
-        private void btItemUrl_1_Click(object sender, RoutedEventArgs e)
+        private void btItemUrl_Click(object sender, RoutedEventArgs e)
         {
-            //System.Diagnostics.Process.Start(jsonKeyWord.item[0].url);
-            ItemWindow itemWindow = new ItemWindow();
+            
+            
+        }
+
+        private void btItemUrl1_Click(object sender, RoutedEventArgs e)
+        {
             itemWindow.num = 0;
             itemWindow.Show();
         }
-
     }
 }
