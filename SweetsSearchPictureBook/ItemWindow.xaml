@@ -5,19 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SweetsSearchPictureBook"
         mc:Ignorable="d"
-        Title="ItemWindow" Height="382.737" Width="575.474" Loaded="ItemWindow_Loaded" Closing="ItemWindow_Closing">
+        Title="ItemWindow" Height="297.326" Width="560.97" Closing="ItemWindow_Closing" IsVisibleChanged="Window_IsVisibleChanged">
+    <Window.Background>
+        <ImageBrush ImageSource="1021018_marshmallow_pattern_1.jpg" Stretch="None"/>
+    </Window.Background>
     <Grid>
-        <Image x:Name="itemImage" HorizontalAlignment="Left" Height="223" Margin="302,98,0,0" VerticalAlignment="Top" Width="231" Source="チロル3.jpg"/>
-        <TextBlock x:Name="snackName" Text="お菓子の名前" HorizontalAlignment="Left" Margin="10,23,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="70" Width="331" FontSize="30"/>
-        <Label Content="メーカー" HorizontalAlignment="Left" Margin="31,139,0,0" VerticalAlignment="Top" Height="33" Width="103" FontSize="20"/>
-        <Label Content="種類" HorizontalAlignment="Left" Margin="31,179,0,0" VerticalAlignment="Top" FontSize="20"/>
-        <Label Content="キーワード" HorizontalAlignment="Left" Margin="29,219,0,0" VerticalAlignment="Top" FontSize="20"/>
-        <Label Content="値段" HorizontalAlignment="Left" Margin="31,261,0,0" VerticalAlignment="Top" FontSize="20"/>
-        <Label Name="itemMaker" Content="明治製菓" HorizontalAlignment="Left" Margin="139,139,0,0" VerticalAlignment="Top" FontSize="20"/>
-        <Label Name="itemType" Content="チョコレート" HorizontalAlignment="Left" Margin="137,179,0,0" VerticalAlignment="Top" FontSize="20"/>
-        <Label Name="itemKeyword" Content="いちご、フラン" HorizontalAlignment="Left" Margin="137,219,0,0" VerticalAlignment="Top" FontSize="20"/>
-        <Label Name="itemPrice" Content="100円" HorizontalAlignment="Left" Margin="139,261,0,0" VerticalAlignment="Top" FontSize="20"/>
-        
+        <Image x:Name="itemImage" HorizontalAlignment="Left" Height="203" Margin="330,10,0,0" VerticalAlignment="Top" Width="207" Source="チロル3.jpg"/>
+        <Label Content="メーカー" HorizontalAlignment="Left" Margin="29,178,0,0" VerticalAlignment="Top" Height="33" Width="103" FontSize="20"/>
+        <Label Content="分類" HorizontalAlignment="Left" Margin="31,138,0,0" VerticalAlignment="Top" FontSize="20"/>
+        <Label Content="値段" HorizontalAlignment="Left" Margin="31,219,0,0" VerticalAlignment="Top" FontSize="20"/>
+        <Label Name="itemMaker" Content="明治製菓" HorizontalAlignment="Left" Margin="137,178,0,0" VerticalAlignment="Top" FontSize="20"/>
+        <Label Name="itemType" Content="チョコレート" HorizontalAlignment="Left" Margin="137,138,0,0" VerticalAlignment="Top" FontSize="20"/>
+        <Label Name="itemPrice" Content="100円" HorizontalAlignment="Left" Margin="139,219,0,0" VerticalAlignment="Top" FontSize="20"/>
+        <TextBlock Name="snackName" Text="お菓子の名前" HorizontalAlignment="Center" Margin="18,10,241,0" TextWrapping="Wrap"
+                   VerticalAlignment="Top" FontSize="27" Height="89" Width="294" Background="#FFF5A679" TextAlignment="Center"/>
+        <Button x:Name="buttonCloseItemWin" Content="閉じる" HorizontalAlignment="Left" Margin="457,225,0,0" VerticalAlignment="Top"
+                Width="68" Height="27" Click="buttonCloseItemWin_Click" Background="#FFEEB984" BorderBrush="Black" BorderThickness="1"/>
+
 
 
     </Grid>

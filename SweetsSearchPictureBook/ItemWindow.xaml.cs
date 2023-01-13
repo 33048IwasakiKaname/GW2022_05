@@ -23,6 +23,7 @@ namespace SweetsSearchPictureBook
         public Rootobject jsonKeyWord = new Rootobject();
         public string url,keyword;
         public int num;
+        public string word;
 
         public ItemWindow()
         {
@@ -35,19 +36,63 @@ namespace SweetsSearchPictureBook
             this.Visibility = Visibility.Collapsed;
         }
 
-        private void ItemWindow_Loaded(object sender, RoutedEventArgs e)
+        private void Window_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             keyword = Window1.keyWord;
             jsonKeyWord = JsonConvert.DeserializeObject<Rootobject>(keyword);
             url = jsonKeyWord.item[num].image;
             BitmapImage imageSource = new BitmapImage(new Uri(url));
             itemImage.Source = imageSource;
-
+            Check();
             snackName.Text = jsonKeyWord.item[num].name;
-            itemMaker.Content = jsonKeyWord.item[num].maker;
-            itemType.Content = jsonKeyWord.item[num].type;
-            itemKeyword.Content = jsonKeyWord.item[num].tags;
-            itemPrice.Content = jsonKeyWord.item[num].price;
+            if (jsonKeyWord.item[num].maker.ToString() != "{}")
+            {
+                itemMaker.Content = jsonKeyWord.item[num].maker;
+            }
+            else
+            {
+                itemMaker.Content = "メーカー不明";
+            }
+
+            if (jsonKeyWord.item[num].price.ToString() != "{}")
+            {
+                itemPrice.Content = jsonKeyWord.item[num].price + "円";
+            }
+            else
+            {
+                itemPrice.Content = "値段不明";
+            }
+        }
+
+        private void buttonCloseItemWin_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        //ローマ字を日本語に変換
+        public string Check()
+        {
+            switch (jsonKeyWord.item[num].type.ToString())
+            {
+                case "cookie":
+                    itemType.Content = "クッキー";
+                    break;
+                case "senbei":
+                    itemType.Content = "せんべい";
+                    break;                
+                case "snack":
+                    itemType.Content = "スナック";
+                    break;
+                case "chocolate":
+                    itemType.Content = "チョコレート";
+                    break;
+                case "candy":
+                    itemType.Content = "キャンディー";
+                    break;
+                default:
+                    break;
+            }
+            return "";
         }
     }
 }

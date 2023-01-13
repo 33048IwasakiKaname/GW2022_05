@@ -60,7 +60,21 @@ namespace SweetsSearchPictureBook
             }
 
             itemScrollViewer.ScrollToTop();
+            if (int.Parse(jsonKeyWord.count) == 0)
+            {
+                MessageBox.Show("見つかりませんでした");
+                return;
+            }
             itemInfo();
+        }
+
+        public void itemCount()
+        {
+            if (int.Parse(jsonKeyWord.count) == 0)
+            {
+                MessageBox.Show("見つかりませんでした");
+                return;
+            }
         }
 
         public void webBrowser()
@@ -69,13 +83,19 @@ namespace SweetsSearchPictureBook
         }
 
         public void itemInfo()
-        {
+        {            
             try
             {
-
                 //1つ目
                 tbItemName_1.Text = jsonKeyWord.item[0].name;
-                tbItemPrice_1.Text = jsonKeyWord.item[0].price.ToString() + "円";
+                if (jsonKeyWord.item[0].price.ToString() != "{}")
+                {
+                    tbItemPrice_1.Text = jsonKeyWord.item[0].price.ToString() + "円";
+                }
+                else
+                {
+                    tbItemPrice_1.Text = "データなし";
+                }
                 var itemUrl_1 = jsonKeyWord.item[0].image;
                 BitmapImage imageSource_1 = new BitmapImage(new Uri(itemUrl_1));
                 pbItemImage_1.Source = imageSource_1;
@@ -189,6 +209,10 @@ namespace SweetsSearchPictureBook
             {
                 
             }
+            catch (NullReferenceException)
+            {
+
+            }
             catch (Exception)
             {
                 MessageBox.Show("エラーが発生しました");
@@ -201,15 +225,104 @@ namespace SweetsSearchPictureBook
             MessageBox.Show("値段が {}円 となる場合がありますがご了承ください");
         }
 
-        private void btItemUrl_Click(object sender, RoutedEventArgs e)
+        private void buttonCloseWin1_Click(object sender, RoutedEventArgs e)
         {
-            
-            
+            this.Close();
         }
 
         private void btItemUrl1_Click(object sender, RoutedEventArgs e)
         {
             itemWindow.num = 0;
+            itemWindow.Show();
+        }
+
+        private void btItemUrl2_Click(object sender, RoutedEventArgs e)
+        {
+            itemWindow.num = 1;
+            itemWindow.Show();
+        }
+
+        private void btItemUrl3_Click(object sender, RoutedEventArgs e)
+        {
+            itemWindow.num = 2;
+            itemWindow.Show();
+        }
+
+        private void btItemUrl4_Click(object sender, RoutedEventArgs e)
+        {
+            itemWindow.num = 3;
+            itemWindow.Show();
+        }
+
+        private void btItemUrl5_Click(object sender, RoutedEventArgs e)
+        {
+            itemWindow.num = 4;
+            itemWindow.Show();
+        }
+
+        private void btItemUrl6_Click(object sender, RoutedEventArgs e)
+        {
+            itemWindow.num = 5;
+            itemWindow.Show();
+        }
+
+        private void btItemUrl7_Click(object sender, RoutedEventArgs e)
+        {
+            itemWindow.num = 6;
+            itemWindow.Show();
+        }
+
+        private void btItemUrl8_Click(object sender, RoutedEventArgs e)
+        {
+            itemWindow.num = 7;
+            itemWindow.Show();
+        }
+
+        private void btItemUrl9_Click(object sender, RoutedEventArgs e)
+        {
+            itemWindow.num = 8;
+            itemWindow.Show();
+        }
+
+        private void btItemUrl10_Click(object sender, RoutedEventArgs e)
+        {
+            itemWindow.num = 9;
+            itemWindow.Show();
+        }
+
+        private void btItemUrl11_Click(object sender, RoutedEventArgs e)
+        {
+            itemWindow.num = 10;
+            itemWindow.Show();
+        }
+
+        private void btItemUrl12_Click(object sender, RoutedEventArgs e)
+        {
+            itemWindow.num = 11;
+            itemWindow.Show();
+        }
+
+        private void btItemUrl13_Click(object sender, RoutedEventArgs e)
+        {
+            itemWindow.num = 12;
+            itemWindow.Show();
+        }
+
+        private void btItemUrl14_Click(object sender, RoutedEventArgs e)
+        {
+            itemWindow.num = 13;
+            itemWindow.Show();
+        }
+
+        private void btItemUrl15_Click(object sender, RoutedEventArgs e)
+        {
+            itemWindow.num = 14;
+            itemWindow.Show();
+        }
+
+        private void btItemUrl16_Click(object sender, RoutedEventArgs e)
+        {
+            itemWindow.num = 15;
             itemWindow.Show();
         }
     }
