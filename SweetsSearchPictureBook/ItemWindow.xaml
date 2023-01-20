@@ -22,7 +22,7 @@
         <TextBlock Name="snackName" Text="お菓子の名前" HorizontalAlignment="Center" Margin="18,10,241,0" TextWrapping="Wrap"
                    VerticalAlignment="Top" FontSize="27" Height="89" Width="294" Background="#FFF5A679" TextAlignment="Center"/>
         <Button x:Name="buttonCloseItemWin" Content="閉じる" HorizontalAlignment="Left" Margin="457,225,0,0" VerticalAlignment="Top"
-                Width="68" Height="27" Click="buttonCloseItemWin_Click" Background="#FFEEB984" BorderBrush="Black" BorderThickness="1"/>
+                Width="68" Height="27" Click="ButtonCloseItemWin_Click" Background="#FFEEB984" BorderBrush="Black" BorderThickness="1"/>
 
 
 

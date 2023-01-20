@@ -40,17 +40,43 @@ namespace SweetsSearchPictureBook
         {
             keyword = Window1.keyWord;
             jsonKeyWord = JsonConvert.DeserializeObject<Rootobject>(keyword);
+
+            try
+            {
+                ItemInfo();
+                Check();
+                NullChecker();
+            }
+            catch (IndexOutOfRangeException)
+            {
+
+            }
+            catch (ArgumentNullException)
+            {
+
+            }           
+        }
+
+        private void ButtonCloseItemWin_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        //アイテム情報
+        public void ItemInfo()
+        {
             url = jsonKeyWord.item[num].image;
             BitmapImage imageSource = new BitmapImage(new Uri(url));
             itemImage.Source = imageSource;
-            Check();
             snackName.Text = jsonKeyWord.item[num].name;
-
             var objTag = jsonKeyWord.item[num].tags.tag.ToString();
-            objTag = objTag.Replace(Environment.NewLine,"");
-            itemTag.Text = objTag.Replace("[","").Replace("]","").Replace("\"","");
+            objTag = objTag.Replace(Environment.NewLine, "");
+            itemTag.Text = objTag.Replace("[", "").Replace("]", "").Replace("\"", "");
+        }
 
-
+        //nullかどうかチェック
+        public void NullChecker()
+        {
             if (jsonKeyWord.item[num].maker.ToString() != "{}")
             {
                 itemMaker.Content = jsonKeyWord.item[num].maker;
@@ -65,17 +91,12 @@ namespace SweetsSearchPictureBook
                 if (jsonKeyWord.item[num].price.ToString() != "0")
                 {
                     itemPrice.Content = jsonKeyWord.item[num].price + "円";
-                }                
+                }
             }
             else
             {
                 itemPrice.Content = "データなし";
             }
-        }
-
-        private void buttonCloseItemWin_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
         }
 
         //ローマ字を日本語に変換

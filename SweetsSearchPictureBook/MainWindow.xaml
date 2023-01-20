@@ -39,7 +39,7 @@
         </Grid>
 
         
-        <Button x:Name="buttonClose" Content="終了" HorizontalAlignment="Left" Margin="321,490,0,0" VerticalAlignment="Top" Width="75" Background="#FFBB8E74" BorderBrush="Black" Click="buttonClose_Click"/>
+        <Button x:Name="buttonClose" Content="終了" HorizontalAlignment="Left" Margin="321,490,0,0" VerticalAlignment="Top" Width="75" Background="#FFBB8E74" BorderBrush="Black" Click="ButtonClose_Click"/>
 
     </Grid>
 </Window>

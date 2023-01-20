@@ -34,7 +34,7 @@ namespace SweetsSearchPictureBook
             //IsEnabled = false;
         }
 
-        private void buttonClose_Click(object sender, RoutedEventArgs e)
+        private void ButtonClose_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }

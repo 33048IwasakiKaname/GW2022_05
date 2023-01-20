@@ -36,7 +36,7 @@ namespace SweetsSearchPictureBook
         {
             keyWord = wc.DownloadString(url);
             jsonKeyWord = JsonConvert.DeserializeObject<Rootobject>(keyWord);
-            itemInfo();
+            ItemInfo();
         }
 
         public Window1()
@@ -48,7 +48,7 @@ namespace SweetsSearchPictureBook
         {
             try
             {
-                keyWord = wc.DownloadString(url + "&keyword=" + tbFreeWord.Text + "&type=" + cbClass.SelectedIndex);
+                keyWord = wc.DownloadString(url + "&keyword=" + tbFreeWord.Text + "&type=" + cbClass.SelectedIndex + "&maker" + cbMaker.SelectedItem);
                 keyWord = keyWord.Replace("\"type\":{}", "\"type\":\"データなし\"");
                 jsonKeyWord = JsonConvert.DeserializeObject<Rootobject>(keyWord);
             }
@@ -81,15 +81,21 @@ namespace SweetsSearchPictureBook
                 return;
             }
 
-            itemInfo();
+            ItemInfo();
+            CountCheck();
         }
 
-        public void countCheck()
+        public void CountCheck()
         {
+            for (int i = 16; i > int.Parse(jsonKeyWord.count); i--)
+            {
 
+            }
         }
 
-        public void itemCount()
+
+        //アイテム数が0の時
+        public void ItemCount()
         {
             if (int.Parse(jsonKeyWord.count) == 0)
             {
@@ -98,12 +104,8 @@ namespace SweetsSearchPictureBook
             }
         }
 
-        public void webBrowser()
-        {
-            System.Diagnostics.Process.Start(jsonKeyWord.item[0].url);
-        }
-
-        public string priceCheck(int num)
+        //値段がnullかどうかチェック
+        public string PriceCheck(int num)
         {
             if (jsonKeyWord.item[num].price.ToString() != "{}")
             {
@@ -122,117 +124,118 @@ namespace SweetsSearchPictureBook
             }
         }
 
-        public void itemInfo()
-        {            
+        //アイテム情報
+        public void ItemInfo()
+        {
             try
             {
                 //1つ目
-                tbItemPrice_1.Text = priceCheck(0);
+                tbItemPrice_1.Text = PriceCheck(0);
                 tbItemName_1.Text = jsonKeyWord.item[0].name;
                 var itemUrl_1 = jsonKeyWord.item[0].image;
                 BitmapImage imageSource_1 = new BitmapImage(new Uri(itemUrl_1));
                 pbItemImage_1.Source = imageSource_1;
 
                 //2つ目
-                tbItemPrice_2.Text = priceCheck(1);
+                tbItemPrice_2.Text = PriceCheck(1);
                 tbItemName_2.Text = jsonKeyWord.item[1].name;
                 var itemUrl_2 = jsonKeyWord.item[1].image;
                 BitmapImage imageSource_2 = new BitmapImage(new Uri(itemUrl_2));
                 pbItemImage_2.Source = imageSource_2;
 
                 //3つ目
-                tbItemPrice_3.Text = priceCheck(2);
+                tbItemPrice_3.Text = PriceCheck(2);
                 tbItemName_3.Text = jsonKeyWord.item[2].name;               
                 var itemUrl_3 = jsonKeyWord.item[2].image;
                 BitmapImage imageSource_3 = new BitmapImage(new Uri(itemUrl_3));
                 pbItemImage_3.Source = imageSource_3;
 
                 //4つ目
-                tbItemPrice_4.Text = priceCheck(3);
+                tbItemPrice_4.Text = PriceCheck(3);
                 tbItemName_4.Text = jsonKeyWord.item[3].name;                
                 var itemUrl_4 = jsonKeyWord.item[3].image;
                 BitmapImage imageSource_4 = new BitmapImage(new Uri(itemUrl_4));
                 pbItemImage_4.Source = imageSource_4;
 
                 //5つ目
-                tbItemPrice_5.Text = priceCheck(4);
+                tbItemPrice_5.Text = PriceCheck(4);
                 tbItemName_5.Text = jsonKeyWord.item[4].name;
                 var itemUrl_5 = jsonKeyWord.item[4].image;
                 BitmapImage imageSource_5 = new BitmapImage(new Uri(itemUrl_5));
                 pbItemImage_5.Source = imageSource_5;
 
                 //6つ目
-                tbItemPrice_6.Text = priceCheck(5);
+                tbItemPrice_6.Text = PriceCheck(5);
                 tbItemName_6.Text = jsonKeyWord.item[5].name;
                 var itemUrl_6 = jsonKeyWord.item[5].image;
                 BitmapImage imageSource_6 = new BitmapImage(new Uri(itemUrl_6));
                 pbItemImage_6.Source = imageSource_6;
 
                 //7つ目
-                tbItemPrice_7.Text = priceCheck(6);
+                tbItemPrice_7.Text = PriceCheck(6);
                 tbItemName_7.Text = jsonKeyWord.item[6].name;
                 var itemUrl_7 = jsonKeyWord.item[6].image;
                 BitmapImage imageSource_7 = new BitmapImage(new Uri(itemUrl_7));
                 pbItemImage_7.Source = imageSource_7;
 
                 //8つ目
-                tbItemPrice_8.Text = priceCheck(7);
+                tbItemPrice_8.Text = PriceCheck(7);
                 tbItemName_8.Text = jsonKeyWord.item[7].name;
                 var itemUrl_8 = jsonKeyWord.item[7].image;
                 BitmapImage imageSource_8 = new BitmapImage(new Uri(itemUrl_8));
                 pbItemImage_8.Source = imageSource_8;
 
                 //9つ目
-                tbItemPrice_9.Text = priceCheck(8);
+                tbItemPrice_9.Text = PriceCheck(8);
                 tbItemName_9.Text = jsonKeyWord.item[8].name;
                 var itemUrl_9 = jsonKeyWord.item[8].image;
                 BitmapImage imageSource_9 = new BitmapImage(new Uri(itemUrl_9));
                 pbItemImage_9.Source = imageSource_9;
 
                 //10つ目
-                tbItemPrice_10.Text = priceCheck(9);
+                tbItemPrice_10.Text = PriceCheck(9);
                 tbItemName_10.Text = jsonKeyWord.item[9].name;
                 var itemUrl_10 = jsonKeyWord.item[9].image;
                 BitmapImage imageSource_10 = new BitmapImage(new Uri(itemUrl_10));
                 pbItemImage_10.Source = imageSource_10;
 
                 //11つ目
-                tbItemPrice_11.Text = priceCheck(10);
+                tbItemPrice_11.Text = PriceCheck(10);
                 tbItemName_11.Text = jsonKeyWord.item[10].name;
                 var itemUrl_11 = jsonKeyWord.item[10].image;
                 BitmapImage imageSource_11 = new BitmapImage(new Uri(itemUrl_11));
                 pbItemImage_11.Source = imageSource_11;
 
                 //12つ目
-                tbItemPrice_12.Text = priceCheck(11);
+                tbItemPrice_12.Text = PriceCheck(11);
                 tbItemName_12.Text = jsonKeyWord.item[11].name;
                 var itemUrl_12 = jsonKeyWord.item[11].image;
                 BitmapImage imageSource_12 = new BitmapImage(new Uri(itemUrl_12));
                 pbItemImage_12.Source = imageSource_12;
 
                 //13つ目
-                tbItemPrice_13.Text = priceCheck(12);
+                tbItemPrice_13.Text = PriceCheck(12);
                 tbItemName_13.Text = jsonKeyWord.item[12].name;
                 var itemUrl_13 = jsonKeyWord.item[12].image;
                 BitmapImage imageSource_13 = new BitmapImage(new Uri(itemUrl_13));
                 pbItemImage_13.Source = imageSource_13;
 
                 //14つ目
-                tbItemPrice_14.Text = priceCheck(13);
+                tbItemPrice_14.Text = PriceCheck(13);
                 tbItemName_14.Text = jsonKeyWord.item[13].name;
                 var itemUrl_14 = jsonKeyWord.item[13].image;
                 BitmapImage imageSource_14 = new BitmapImage(new Uri(itemUrl_14));
                 pbItemImage_14.Source = imageSource_14;
 
                 //15つ目
-                tbItemPrice_15.Text = priceCheck(14);
+                tbItemPrice_15.Text = PriceCheck(14);
                 tbItemName_15.Text = jsonKeyWord.item[14].name;
                 var itemUrl_15 = jsonKeyWord.item[14].image;
                 BitmapImage imageSource_15 = new BitmapImage(new Uri(itemUrl_15));
                 pbItemImage_15.Source = imageSource_15;
 
                 //16つ目
-                tbItemPrice_16.Text = priceCheck(15);
+                tbItemPrice_16.Text = PriceCheck(15);
                 tbItemName_16.Text = jsonKeyWord.item[15].name;
                 var itemUrl_16 = jsonKeyWord.item[15].image;
                 BitmapImage imageSource_16 = new BitmapImage(new Uri(itemUrl_16));
@@ -253,83 +256,84 @@ namespace SweetsSearchPictureBook
             
         }
 
-        private void button_Infomation(object sender, RoutedEventArgs e)
+        private void Button_Infomation(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("値段が データなし となる場合がありますがご了承ください");
         }
 
-        private void buttonCloseWin1_Click(object sender, RoutedEventArgs e)
+        private void ButtonCloseWin1_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
 
-        private void btItemUrl1_Click(object sender, RoutedEventArgs e)
+        
+        private void BtItemUrl1_Click(object sender, RoutedEventArgs e)
         {
             itemWindow.num = 0;
             itemWindow.Show();
         }
 
-        private void btItemUrl2_Click(object sender, RoutedEventArgs e)
+        private void BtItemUrl2_Click(object sender, RoutedEventArgs e)
         {
             itemWindow.num = 1;
             itemWindow.Show();
         }
 
-        private void btItemUrl3_Click(object sender, RoutedEventArgs e)
+        private void BtItemUrl3_Click(object sender, RoutedEventArgs e)
         {
             itemWindow.num = 2;
             itemWindow.Show();
         }
 
-        private void btItemUrl4_Click(object sender, RoutedEventArgs e)
+        private void BtItemUrl4_Click(object sender, RoutedEventArgs e)
         {
             itemWindow.num = 3;
             itemWindow.Show();
         }
 
-        private void btItemUrl5_Click(object sender, RoutedEventArgs e)
+        private void BtItemUrl5_Click(object sender, RoutedEventArgs e)
         {
             itemWindow.num = 4;
             itemWindow.Show();
         }
 
-        private void btItemUrl6_Click(object sender, RoutedEventArgs e)
+        private void BtItemUrl6_Click(object sender, RoutedEventArgs e)
         {
             itemWindow.num = 5;
             itemWindow.Show();
         }
 
-        private void btItemUrl7_Click(object sender, RoutedEventArgs e)
+        private void BtItemUrl7_Click(object sender, RoutedEventArgs e)
         {
             itemWindow.num = 6;
             itemWindow.Show();
         }
 
-        private void btItemUrl8_Click(object sender, RoutedEventArgs e)
+        private void BtItemUrl8_Click(object sender, RoutedEventArgs e)
         {
             itemWindow.num = 7;
             itemWindow.Show();
         }
 
-        private void btItemUrl9_Click(object sender, RoutedEventArgs e)
+        private void BtItemUrl9_Click(object sender, RoutedEventArgs e)
         {
             itemWindow.num = 8;
             itemWindow.Show();
         }
 
-        private void btItemUrl10_Click(object sender, RoutedEventArgs e)
+        private void BtItemUrl10_Click(object sender, RoutedEventArgs e)
         {
             itemWindow.num = 9;
             itemWindow.Show();
         }
 
-        private void btItemUrl11_Click(object sender, RoutedEventArgs e)
+        private void BtItemUrl11_Click(object sender, RoutedEventArgs e)
         {
             itemWindow.num = 10;
             itemWindow.Show();
         }
 
-        private void btItemUrl12_Click(object sender, RoutedEventArgs e)
+        private void BtItemUrl12_Click(object sender, RoutedEventArgs e)
         {
             itemWindow.num = 11;
             itemWindow.Show();
@@ -341,19 +345,19 @@ namespace SweetsSearchPictureBook
             itemWindow.Show();
         }
 
-        private void btItemUrl14_Click(object sender, RoutedEventArgs e)
+        private void BtItemUrl14_Click(object sender, RoutedEventArgs e)
         {
             itemWindow.num = 13;
             itemWindow.Show();
         }
 
-        private void btItemUrl15_Click(object sender, RoutedEventArgs e)
+        private void BtItemUrl15_Click(object sender, RoutedEventArgs e)
         {
             itemWindow.num = 14;
             itemWindow.Show();
         }
 
-        private void btItemUrl16_Click(object sender, RoutedEventArgs e)
+        private void BtItemUrl16_Click(object sender, RoutedEventArgs e)
         {
             itemWindow.num = 15;
             itemWindow.Show();
