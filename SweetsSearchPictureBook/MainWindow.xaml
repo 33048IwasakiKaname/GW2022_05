@@ -29,11 +29,16 @@
         </Grid.Background>
         
         <Label Content="お菓子図鑑" HorizontalAlignment="Left" Margin="77,56,0,0" VerticalAlignment="Top" Height="98" Width="292" FontSize="40" Foreground="#DDFFFFFF" FontFamily="UD Digi Kyokasho NP-B"/>
-        <Button x:Name="Search" HorizontalAlignment="Left" Margin="39,217,0,0" VerticalAlignment="Top" Width="330" Height="150" Click="Search_Click" FontSize="30" FontFamily="Snap ITC" Foreground="#DDB06F6F" Background="{x:Null}" BorderBrush="#FFFFDEDE" BorderThickness="3">
-            <Image Margin="-17,-35,0,0" Height="221" Width="374" Source="チョコ　欠けてる　メインメニュー.png"/>
-        </Button>
+        <Grid>
+            <Button x:Name="Search" HorizontalAlignment="Left" Margin="39,217,0,0" VerticalAlignment="Top" Width="330" Height="150" Click="Search_Click" FontSize="30" FontFamily="Snap ITC" Foreground="#DDB06F6F" Background="{x:Null}" BorderBrush="#FFFFDEDE" BorderThickness="3">
+                <Grid>
+                    <Image Margin="-17,-35,0,0" Height="221" Width="374" Source="チョコ　欠けてる　メインメニュー.png"/>
+                    <Label Content="探す" FontFamily="HGSSoeiKakupoptai" FontSize="50" Foreground="#DD000000" Margin="40,40,0,0"/>
+                </Grid>
+            </Button>
+        </Grid>
 
-        <Label Content="探す" FontFamily="HGSSoeiKakupoptai" FontSize="50" Foreground="#DD000000" Margin="89,258,208,201"/>
+        
         <Button x:Name="buttonClose" Content="終了" HorizontalAlignment="Left" Margin="321,490,0,0" VerticalAlignment="Top" Width="75" Background="#FFBB8E74" BorderBrush="Black" Click="buttonClose_Click"/>
 
     </Grid>

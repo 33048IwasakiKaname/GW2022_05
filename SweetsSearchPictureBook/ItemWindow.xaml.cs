@@ -45,6 +45,12 @@ namespace SweetsSearchPictureBook
             itemImage.Source = imageSource;
             Check();
             snackName.Text = jsonKeyWord.item[num].name;
+
+            var objTag = jsonKeyWord.item[num].tags.tag.ToString();
+            objTag = objTag.Replace(Environment.NewLine,"");
+            itemTag.Text = objTag.Replace("[","").Replace("]","").Replace("\"","");
+
+
             if (jsonKeyWord.item[num].maker.ToString() != "{}")
             {
                 itemMaker.Content = jsonKeyWord.item[num].maker;
@@ -56,11 +62,14 @@ namespace SweetsSearchPictureBook
 
             if (jsonKeyWord.item[num].price.ToString() != "{}")
             {
-                itemPrice.Content = jsonKeyWord.item[num].price + "円";
+                if (jsonKeyWord.item[num].price.ToString() != "0")
+                {
+                    itemPrice.Content = jsonKeyWord.item[num].price + "円";
+                }                
             }
             else
             {
-                itemPrice.Content = "値段不明";
+                itemPrice.Content = "データなし";
             }
         }
 
