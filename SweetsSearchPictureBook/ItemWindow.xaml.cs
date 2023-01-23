@@ -45,7 +45,7 @@ namespace SweetsSearchPictureBook
             {
                 ItemInfo();
                 Check();
-                NullChecker();
+                NullChecker();  
             }
             catch (IndexOutOfRangeException)
             {
@@ -59,6 +59,8 @@ namespace SweetsSearchPictureBook
 
         private void ButtonCloseItemWin_Click(object sender, RoutedEventArgs e)
         {
+            var win1 = new Window1();
+            win1.tbItemPrice_1.Text = "変更しました";
             this.Close();
         }
 
@@ -71,7 +73,7 @@ namespace SweetsSearchPictureBook
             snackName.Text = jsonKeyWord.item[num].name;
             var objTag = jsonKeyWord.item[num].tags.tag.ToString();
             objTag = objTag.Replace(Environment.NewLine, "");
-            itemTag.Text = objTag.Replace("[", "").Replace("]", "").Replace("\"", "");
+            itemTag.Text = objTag.Replace("[", "").Replace("]", "").Replace("\"", "");  
         }
 
         //nullかどうかチェック
