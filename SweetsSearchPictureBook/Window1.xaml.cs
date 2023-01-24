@@ -46,7 +46,7 @@ namespace SweetsSearchPictureBook
 
         public void Search_Click(object sender, RoutedEventArgs e)
         {
-            
+            Clear();
 
             try
             {
@@ -62,8 +62,17 @@ namespace SweetsSearchPictureBook
             }
             catch(JsonSerializationException)
             {
-                keyWord = wc.DownloadString(url + "&keyword=" + tbFreeWord.Text + "&type=" + cbClass.SelectedIndex + "&max=" + 10);
-                jsonKeyWord = JsonConvert.DeserializeObject<Rootobject>(keyWord);
+                try
+                {
+                    keyWord = wc.DownloadString(url + "&keyword=" + tbFreeWord.Text + "&type=" + 
+                        cbClass.SelectedIndex + "&max=" + 10);
+                    jsonKeyWord = JsonConvert.DeserializeObject<Rootobject>(keyWord);
+                }
+                catch (JsonSerializationException)
+                {
+                    
+                }
+                
             }
             catch (Exception)
             {
@@ -77,7 +86,6 @@ namespace SweetsSearchPictureBook
                 return;
             }
 
-            Clear();
             ItemInfo();
         }
 
@@ -114,142 +122,93 @@ namespace SweetsSearchPictureBook
         //アイテム情報
         public void ItemInfo()
         {
-            try
-            {
-
-                Button[] buttonArray = { btItemUrl_1,btItemUrl_2,btItemUrl_3,btItemUrl_4,btItemUrl_5,btItemUrl_6,
+            //======================お菓子のボタン設定======================
+            Button[] buttonArray = { btItemUrl_1,btItemUrl_2,btItemUrl_3,btItemUrl_4,btItemUrl_5,btItemUrl_6,
                                          btItemUrl_7,btItemUrl_8,btItemUrl_9,btItemUrl_10,btItemUrl_11,btItemUrl_12,
                                          btItemUrl_13,btItemUrl_14,btItemUrl_15,btItemUrl_16};
-                for (int i = 0; i < int.Parse(jsonKeyWord.count); i++)
-                {
-                    buttonArray[i].IsEnabled = true;
-                }
-                
+            for (int i = 0; i < int.Parse(jsonKeyWord.count); i++)
+            {
+                buttonArray[i].IsEnabled = true;
+            }
 
-                TextBlock[] tbItemPrice = { tbItemPrice_1,tbItemPrice_2,tbItemPrice_3,tbItemPrice_4,tbItemPrice_5,
+
+            //======================お菓子の値段設定======================
+            TextBlock[] tbItemPrice = { tbItemPrice_1,tbItemPrice_2,tbItemPrice_3,tbItemPrice_4,tbItemPrice_5,
                                             tbItemPrice_6,tbItemPrice_7,tbItemPrice_8,tbItemPrice_9,tbItemPrice_10,
                                             tbItemPrice_11,tbItemPrice_12,tbItemPrice_13,tbItemPrice_14,tbItemPrice_15,
                                             tbItemPrice_16};
-                for (int i = 0; i < int.Parse(jsonKeyWord.count); i++)
-                {
-                    tbItemPrice[i].Text = PriceCheck(i);
-                }
+            for (int i = 0; i < int.Parse(jsonKeyWord.count); i++)
+            {
+                tbItemPrice[i].Text = PriceCheck(i);
+            }
 
 
-                TextBlock[] tbItemName = { tbItemName_1,tbItemName_2, tbItemName_3, tbItemName_4, tbItemName_5,
+            //======================お菓子の名前設定======================
+            TextBlock[] tbItemName = { tbItemName_1,tbItemName_2, tbItemName_3, tbItemName_4, tbItemName_5,
                                            tbItemName_6,tbItemName_7,tbItemName_8,tbItemName_9,tbItemName_10,
                                            tbItemName_11,tbItemName_12,tbItemName_13,tbItemName_14,tbItemName_15,
                                            tbItemName_16};
-                for (int i = 0; i < int.Parse(jsonKeyWord.count); i++)
-                {
-                    tbItemName[i].Text = jsonKeyWord.item[i].name;
-                }
-
-
-                string itemUrl_1="", itemUrl_2="", itemUrl_3="";
-                Hashtable hash = new Hashtable();
-                for (int i = 1; i < 3; i++)
-                {
-                    hash["itemUrl_" + i] = jsonKeyWord.item[i].image;
-                }
-                //var a = hash.Keys;
-               
-                //1つ目
-                //var itemUrl_1 = jsonKeyWord.item[0].image;
-                BitmapImage imageSource_1 = new BitmapImage(new Uri(itemUrl_1));
-                pbItemImage_1.Source = imageSource_1;
-
-                //2つ目
-                //var itemUrl_2 = jsonKeyWord.item[1].image;
-                BitmapImage imageSource_2 = new BitmapImage(new Uri(itemUrl_2));
-                pbItemImage_2.Source = imageSource_2;
-
-                //3つ目           
-                //var itemUrl_3 = jsonKeyWord.item[2].image;
-                BitmapImage imageSource_3 = new BitmapImage(new Uri(itemUrl_3));
-                pbItemImage_3.Source = imageSource_3;
-
-                //4つ目             
-                var itemUrl_4 = jsonKeyWord.item[3].image;
-                BitmapImage imageSource_4 = new BitmapImage(new Uri(itemUrl_4));
-                pbItemImage_4.Source = imageSource_4;
-
-                //5つ目
-                var itemUrl_5 = jsonKeyWord.item[4].image;
-                BitmapImage imageSource_5 = new BitmapImage(new Uri(itemUrl_5));
-                pbItemImage_5.Source = imageSource_5;
-
-                //6つ目
-                var itemUrl_6 = jsonKeyWord.item[5].image;
-                BitmapImage imageSource_6 = new BitmapImage(new Uri(itemUrl_6));
-                pbItemImage_6.Source = imageSource_6;
-
-                //7つ目
-                var itemUrl_7 = jsonKeyWord.item[6].image;
-                BitmapImage imageSource_7 = new BitmapImage(new Uri(itemUrl_7));
-                pbItemImage_7.Source = imageSource_7;
-
-                //8つ目
-                var itemUrl_8 = jsonKeyWord.item[7].image;
-                BitmapImage imageSource_8 = new BitmapImage(new Uri(itemUrl_8));
-                pbItemImage_8.Source = imageSource_8;
-
-                //9つ目
-                var itemUrl_9 = jsonKeyWord.item[8].image;
-                BitmapImage imageSource_9 = new BitmapImage(new Uri(itemUrl_9));
-                pbItemImage_9.Source = imageSource_9;
-
-                //10つ目
-                var itemUrl_10 = jsonKeyWord.item[9].image;
-                BitmapImage imageSource_10 = new BitmapImage(new Uri(itemUrl_10));
-                pbItemImage_10.Source = imageSource_10;
-
-                //11つ目
-                var itemUrl_11 = jsonKeyWord.item[10].image;
-                BitmapImage imageSource_11 = new BitmapImage(new Uri(itemUrl_11));
-                pbItemImage_11.Source = imageSource_11;
-
-                //12つ目
-                var itemUrl_12 = jsonKeyWord.item[11].image;
-                BitmapImage imageSource_12 = new BitmapImage(new Uri(itemUrl_12));
-                pbItemImage_12.Source = imageSource_12;
-
-                //13つ目
-                var itemUrl_13 = jsonKeyWord.item[12].image;
-                BitmapImage imageSource_13 = new BitmapImage(new Uri(itemUrl_13));
-                pbItemImage_13.Source = imageSource_13;
-
-                //14つ目
-                var itemUrl_14 = jsonKeyWord.item[13].image;
-                BitmapImage imageSource_14 = new BitmapImage(new Uri(itemUrl_14));
-                pbItemImage_14.Source = imageSource_14;
-
-                //15つ目
-                var itemUrl_15 = jsonKeyWord.item[14].image;
-                BitmapImage imageSource_15 = new BitmapImage(new Uri(itemUrl_15));
-                pbItemImage_15.Source = imageSource_15;
-
-                //16つ目
-                var itemUrl_16 = jsonKeyWord.item[15].image;
-                BitmapImage imageSource_16 = new BitmapImage(new Uri(itemUrl_16));
-                pbItemImage_16.Source = imageSource_16;
-            }
-            //catch (IndexOutOfRangeException)
-            //{
-
-            //}
-            //catch (NullReferenceException)
-            //{
-
-            //}
-            //catch (Exception)
-            //{
-            //    MessageBox.Show("エラーが発生しました");
-            //}
-            catch (NullReferenceException)
+            for (int i = 0; i < int.Parse(jsonKeyWord.count); i++)
             {
-
+                tbItemName[i].Text = jsonKeyWord.item[i].name;
             }
+
+
+            //======================お菓子の画像設定======================
+
+            BitmapImage imageSource_1,imageSource_2,imageSource_3,imageSource_4,imageSource_5,imageSource_6,imageSource_7,
+                        imageSource_8,imageSource_9,imageSource_10,imageSource_11,imageSource_12,imageSource_13,
+                        imageSource_14,imageSource_15,imageSource_16;
+
+            imageSource_1 = imageSource_2 = imageSource_3 = imageSource_4 = imageSource_5 = imageSource_6 =
+            imageSource_7 = imageSource_8 = imageSource_9 = imageSource_10 = imageSource_11 = imageSource_12 =
+            imageSource_13 = imageSource_14 = imageSource_15 = imageSource_16 = null;
+
+            try
+            {
+                imageSource_1 = new BitmapImage(new Uri(jsonKeyWord.item[0].image));
+                imageSource_2 = new BitmapImage(new Uri(jsonKeyWord.item[1].image));
+                imageSource_3 = new BitmapImage(new Uri(jsonKeyWord.item[2].image));
+                imageSource_4 = new BitmapImage(new Uri(jsonKeyWord.item[3].image));
+                imageSource_5 = new BitmapImage(new Uri(jsonKeyWord.item[4].image));
+                imageSource_6 = new BitmapImage(new Uri(jsonKeyWord.item[5].image));
+                imageSource_7 = new BitmapImage(new Uri(jsonKeyWord.item[6].image));
+                imageSource_8 = new BitmapImage(new Uri(jsonKeyWord.item[7].image));
+                imageSource_9 = new BitmapImage(new Uri(jsonKeyWord.item[8].image));
+                imageSource_10 = new BitmapImage(new Uri(jsonKeyWord.item[9].image));
+                imageSource_11 = new BitmapImage(new Uri(jsonKeyWord.item[10].image));
+                imageSource_12 = new BitmapImage(new Uri(jsonKeyWord.item[11].image));
+                imageSource_13 = new BitmapImage(new Uri(jsonKeyWord.item[12].image));
+                imageSource_14 = new BitmapImage(new Uri(jsonKeyWord.item[13].image));
+                imageSource_15 = new BitmapImage(new Uri(jsonKeyWord.item[14].image));
+                imageSource_16 = new BitmapImage(new Uri(jsonKeyWord.item[15].image));                
+            }
+            catch (Exception)
+            {
+                
+            }
+            
+
+
+            Image[] pbItemImage = { pbItemImage_1, pbItemImage_2, pbItemImage_3, pbItemImage_4, pbItemImage_5,
+                                        pbItemImage_6,pbItemImage_7,pbItemImage_8,pbItemImage_9,pbItemImage_10,
+                                        pbItemImage_11,pbItemImage_12,pbItemImage_13,pbItemImage_14,pbItemImage_15,
+                                        pbItemImage_16};
+
+            BitmapImage[] imageSorce = {imageSource_1,imageSource_2,imageSource_3,imageSource_4,imageSource_5,
+                                        imageSource_6,imageSource_7,imageSource_8,imageSource_9,imageSource_10,
+                                        imageSource_11,imageSource_12,imageSource_13,imageSource_14,imageSource_15,
+                                        imageSource_16};
+
+
+
+            for (int i = 0; i < int.Parse(jsonKeyWord.count); i++)
+            {
+                pbItemImage[i].Source = imageSorce[i];
+            }
+
+
+            //IndexOutOfRangeException
 
         }
 
@@ -337,9 +296,10 @@ namespace SweetsSearchPictureBook
             btItemUrl_16.IsEnabled = false;
         }
 
-        public void ItemEnabled()
+        //アイテムが1つの時
+        public void JsonOnlyOne(Item json)
         {
-            
+            tbItemName_1.Text = json.name;
         }
 
         //インフォメーションボタン
