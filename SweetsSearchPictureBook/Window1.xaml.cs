@@ -54,7 +54,7 @@ namespace SweetsSearchPictureBook
             {
                 if (cbArea.SelectedIndex != 0)
                 {
-                    newUrl = newUrl + "&type=99" + "&keyword=" + cbArea.Text; ;
+                    newUrl = newUrl + "&type=99" + "&keyword=" + cbArea.Text;
                 }
 
                 keyWord = wc.DownloadString(newUrl);
@@ -361,6 +361,11 @@ namespace SweetsSearchPictureBook
         {
             itemWindow.num = 15;
             itemWindow.Show();
+        }
+
+        private void toggleBtArea_Checked(object sender, RoutedEventArgs e)
+        {
+            //MessageBox.Show("オンです");
         }
     }
 }
