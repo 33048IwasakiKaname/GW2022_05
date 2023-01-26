@@ -144,7 +144,8 @@
         <Label Content="フリーキーワード検索" FontSize="35" FontWeight="ExtraBlack" BorderBrush="Black" HorizontalAlignment="Center" BorderThickness="4" Margin="37,10,22,708" Background="White"/>
         <TextBox x:Name="tbFreeWord" BorderBrush="Black" BorderThickness="2" HorizontalAlignment="Left" Height="49" Margin="121,42,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="504" FontSize="30" Grid.Column="1" Background="White"
                  materialDesign:HintAssist.Hint="お菓子の名前" InputMethod.PreferredImeState="On"/>
-        <Button x:Name="Search" HorizontalAlignment="Left" Margin="638,44,0,0" VerticalAlignment="Top" Width="150" Height="47" FontSize="30" Grid.Column="1" Click="Search_Click" BorderBrush="Black">
+        <Button x:Name="Search" HorizontalAlignment="Left" Margin="638,44,0,0" VerticalAlignment="Top" Width="150" 
+                Height="47" FontSize="30" Grid.Column="1" Click="Search_Click" BorderBrush="Black" IsDefault="True">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                     <GradientStop Color="#FF786565" Offset="1"/>
@@ -156,8 +157,7 @@
         <materialDesign:PackIcon Kind="Search" Height="56" Width="59" Grid.Column="1" Margin="635,42,0,0"/>
 
         <Label Content="分類：" HorizontalAlignment="Left" Margin="12,168,0,0" VerticalAlignment="Top" FontSize="25" Height="42" Width="78"/>
-        <Label Content="メーカー：" HorizontalAlignment="Left" Margin="12,266,0,0" VerticalAlignment="Top" FontSize="22" Height="38" Width="92"/>
-        <Label Content="地域限定：" HorizontalAlignment="Left" Margin="12,366,0,0" VerticalAlignment="Top" FontSize="22" Height="38" Width="120"/>
+        <Label Content="地域限定：" HorizontalAlignment="Left" Margin="12,276,0,0" VerticalAlignment="Top" FontSize="22" Height="38" Width="120"/>
         <ComboBox Name="cbClass" SelectedIndex="0" HorizontalAlignment="Left" Margin="54,210,0,0" VerticalAlignment="Top" Width="152" Height="32" FontSize="20">
             <ComboBoxItem Content="すべて"/>
             <ComboBoxItem Content="スナック"/>
@@ -166,33 +166,19 @@
             <ComboBoxItem Content="飴・ガム"/>
             <ComboBoxItem Content="せんべい・和風"/>
         </ComboBox>
-        <ComboBox Name="cbMaker" SelectedIndex="0" HorizontalAlignment="Left" Margin="54,304,0,0" VerticalAlignment="Top" Width="152" Height="32" FontSize="20">
-            <ComboBoxItem Content="すべて"/>
-            <ComboBoxItem Content="サッポロ"/>
-            <ComboBoxItem Content="チロルチョコ"/>
-            <ComboBoxItem Content="不二家"/>
-            <ComboBoxItem Content="カバヤ"/>
-            <ComboBoxItem Content="ロッテ"/>
-            <ComboBoxItem Content="明治製菓"/>
-            <ComboBoxItem Content="亀田製菓"/>
-            <ComboBoxItem Content="森永"/>
-            <ComboBoxItem Content="おやつカンパニー"/>
-            <ComboBoxItem Content="カルビー"/>
-            <ComboBoxItem Content="ハウス"/>
-            <ComboBoxItem Content="東ハト"/>
-            <ComboBoxItem Content="グリコ"/>
-            <ComboBoxItem Content="ネスレ"/>
-            <ComboBoxItem Content="エスビー"/>
-            <ComboBoxItem Content="フルタ"/>
-            <ComboBoxItem Content="ギンビス"/>
-            <ComboBoxItem Content="ブルボン"/>
-            <ComboBoxItem Content="ヤマヨシ"/>
-            <ComboBoxItem Content="UHA味覚糖"/>
-            <ComboBoxItem Content="湖池屋"/>
-            <ComboBoxItem Content="日清シスコ"/>
-        </ComboBox>
-        <ComboBox HorizontalAlignment="Left" SelectedIndex="0" Margin="54,404,0,0" VerticalAlignment="Top" Width="152" Height="32" FontSize="20">
+        <ComboBox Name="cbArea" HorizontalAlignment="Left" SelectedIndex="0" Margin="54,314,0,0" VerticalAlignment="Top" Width="152" Height="32" FontSize="20">
             <ComboBoxItem Content="指定なし"/>
+            <ComboBoxItem Content="北海道"/>
+            <ComboBoxItem Content="東北"/>
+            <ComboBoxItem Content="関東"/>
+            <ComboBoxItem Content="甲信越"/>
+            <ComboBoxItem Content="北陸"/>
+            <ComboBoxItem Content="東海"/>
+            <ComboBoxItem Content="関西"/>
+            <ComboBoxItem Content="四国"/>
+            <ComboBoxItem Content="九州"/>
+            <ComboBoxItem Content="沖縄"/>
+            <ComboBoxItem Content="海外"/>
         </ComboBox>
 
         <Button

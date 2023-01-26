@@ -31,6 +31,7 @@ namespace SweetsSearchPictureBook
         public ItemWindow itemWindow = new ItemWindow();
 
         public static string keyWord;
+        public string newUrl;
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -48,10 +49,15 @@ namespace SweetsSearchPictureBook
         {
             Clear();
 
+            newUrl = url + "&keyword=" + tbFreeWord.Text + "&type=" + cbClass.SelectedIndex;
             try
             {
-                keyWord = wc.DownloadString(url + "&keyword=" + tbFreeWord.Text + "&type=" + cbClass.SelectedIndex + 
-                    "&maker" + cbMaker.SelectedItem);
+                if (cbArea.SelectedIndex != 0)
+                {
+                    newUrl = newUrl + "&type=99" + "&keyword=" + cbArea.Text; ;
+                }
+
+                keyWord = wc.DownloadString(newUrl);
                 keyWord = keyWord.Replace("\"type\":{}", "\"type\":\"データなし\"");
                 jsonKeyWord = JsonConvert.DeserializeObject<Rootobject>(keyWord);
             }
@@ -62,17 +68,18 @@ namespace SweetsSearchPictureBook
             }
             catch(JsonSerializationException)
             {
+                keyWord = wc.DownloadString(url + "&keyword=" + tbFreeWord.Text + "&type=" +
+                        cbClass.SelectedIndex + "&max=" + 10);
+                jsonKeyWord = JsonConvert.DeserializeObject<Rootobject>(keyWord);
+
                 try
                 {
-                    keyWord = wc.DownloadString(url + "&keyword=" + tbFreeWord.Text + "&type=" + 
-                        cbClass.SelectedIndex + "&max=" + 10);
-                    jsonKeyWord = JsonConvert.DeserializeObject<Rootobject>(keyWord);
+                    
                 }
                 catch (JsonSerializationException)
                 {
                     
                 }
-                
             }
             catch (Exception)
             {
@@ -215,85 +222,29 @@ namespace SweetsSearchPictureBook
         //アイテム情報クリア
         public void Clear()
         {
-            tbItemPrice_1.Text = null;
-            tbItemName_1.Text = null;
-            pbItemImage_1.Source = null;
-            btItemUrl_1.IsEnabled = false;
+            TextBlock[] tbItemPrice = { tbItemPrice_1,tbItemPrice_2,tbItemPrice_3,tbItemPrice_4,tbItemPrice_5,
+                                            tbItemPrice_6,tbItemPrice_7,tbItemPrice_8,tbItemPrice_9,tbItemPrice_10,
+                                            tbItemPrice_11,tbItemPrice_12,tbItemPrice_13,tbItemPrice_14,tbItemPrice_15,
+                                            tbItemPrice_16};
+            TextBlock[] tbItemName = { tbItemName_1,tbItemName_2, tbItemName_3, tbItemName_4, tbItemName_5,
+                                           tbItemName_6,tbItemName_7,tbItemName_8,tbItemName_9,tbItemName_10,
+                                           tbItemName_11,tbItemName_12,tbItemName_13,tbItemName_14,tbItemName_15,
+                                           tbItemName_16};
+            Image[] pbItemImage = { pbItemImage_1, pbItemImage_2, pbItemImage_3, pbItemImage_4, pbItemImage_5,
+                                        pbItemImage_6,pbItemImage_7,pbItemImage_8,pbItemImage_9,pbItemImage_10,
+                                        pbItemImage_11,pbItemImage_12,pbItemImage_13,pbItemImage_14,pbItemImage_15,
+                                        pbItemImage_16};
+            Button[] btItemUrl = { btItemUrl_1,btItemUrl_2,btItemUrl_3,btItemUrl_4,btItemUrl_5,btItemUrl_6,btItemUrl_7,
+                                        btItemUrl_8,btItemUrl_9,btItemUrl_10,btItemUrl_11,btItemUrl_12,btItemUrl_13,
+                                        btItemUrl_14,btItemUrl_15,btItemUrl_16};
 
-            tbItemPrice_2.Text = null;
-            tbItemName_2.Text = null;
-            pbItemImage_2.Source = null;
-            btItemUrl_2.IsEnabled = false;
-
-            tbItemPrice_3.Text = null;
-            tbItemName_3.Text = null;
-            pbItemImage_3.Source = null;
-            btItemUrl_3.IsEnabled = false;
-
-            tbItemPrice_4.Text = null;
-            tbItemName_4.Text = null;
-            pbItemImage_4.Source = null;
-            btItemUrl_4.IsEnabled = false;
-
-            tbItemPrice_5.Text = null;
-            tbItemName_5.Text = null;
-            pbItemImage_5.Source = null;
-            btItemUrl_5.IsEnabled = false;
-
-            tbItemPrice_6.Text = null;
-            tbItemName_6.Text = null;
-            pbItemImage_6.Source = null;
-            btItemUrl_6.IsEnabled = false;
-
-            tbItemPrice_7.Text = null;
-            tbItemName_7.Text = null;
-            pbItemImage_7.Source = null;
-            btItemUrl_7.IsEnabled = false;
-
-            tbItemPrice_8.Text = null;
-            tbItemName_8.Text = null;
-            pbItemImage_8.Source = null;
-            btItemUrl_8.IsEnabled = false;
-
-            tbItemPrice_9.Text = null;
-            tbItemName_9.Text = null;
-            pbItemImage_9.Source = null;
-            btItemUrl_9.IsEnabled = false;
-
-            tbItemPrice_10.Text = null;
-            tbItemName_10.Text = null;
-            pbItemImage_10.Source = null;
-            btItemUrl_10.IsEnabled = false;
-
-            tbItemPrice_11.Text = null;
-            tbItemName_11.Text = null;
-            pbItemImage_11.Source = null;
-            btItemUrl_11.IsEnabled = false;
-
-            tbItemPrice_12.Text = null;
-            tbItemName_12.Text = null;
-            pbItemImage_12.Source = null;
-            btItemUrl_12.IsEnabled = false;
-
-            tbItemPrice_13.Text = null;
-            tbItemName_13.Text = null;
-            pbItemImage_13.Source = null;
-            btItemUrl_13.IsEnabled = false;
-
-            tbItemPrice_14.Text = null;
-            tbItemName_14.Text = null;
-            pbItemImage_14.Source = null;
-            btItemUrl_14.IsEnabled = false;
-
-            tbItemPrice_15.Text = null;
-            tbItemName_15.Text = null;
-            pbItemImage_15.Source = null;
-            btItemUrl_15.IsEnabled = false;
-
-            tbItemPrice_16.Text = null;
-            tbItemName_16.Text = null;
-            pbItemImage_16.Source = null;
-            btItemUrl_16.IsEnabled = false;
+            for (int i = 0; i < 16; i++)
+            {
+                tbItemPrice[i].Text = null;
+                tbItemName[i].Text = null;
+                pbItemImage[i].Source = null;
+                btItemUrl[i].IsEnabled = false;
+            }
         }
 
         //アイテムが1つの時
@@ -305,7 +256,9 @@ namespace SweetsSearchPictureBook
         //インフォメーションボタン
         private void Button_Infomation(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("値段が データなし となる場合がありますがご了承ください");
+            MessageBox.Show("・値段が データなし となる場合がありますがご了承ください。\n" +
+                "・地域限定を指定した場合はキーワード検索は無効になり、その地域のお菓子がオールジャンルで表示されます。\n" + 
+                "・まれに指定ワードに沿わない結果が表示される場合があります。");
         }
 
         //ウィンドウ閉じるイベント
