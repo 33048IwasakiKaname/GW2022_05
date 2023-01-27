@@ -28,13 +28,16 @@ namespace SweetsSearchPictureBook
 
         public WebClient wc = new WebClient();
         public static Rootobject jsonKeyWord = new Rootobject();
+        public Rootobject_only jsonKeyWord_only = new Rootobject_only();
         public ItemWindow itemWindow = new ItemWindow();
 
         public static string keyWord;
         public string newUrl;
+        
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            cbArea.IsEnabled = false;
             keyWord = wc.DownloadString(url);
             jsonKeyWord = JsonConvert.DeserializeObject<Rootobject>(keyWord);
             ItemInfo();
@@ -45,10 +48,10 @@ namespace SweetsSearchPictureBook
             InitializeComponent();
         }
 
+        //検索ボタンクリック
         public void Search_Click(object sender, RoutedEventArgs e)
         {
             Clear();
-
             newUrl = url + "&keyword=" + tbFreeWord.Text + "&type=" + cbClass.SelectedIndex;
             try
             {
@@ -68,17 +71,16 @@ namespace SweetsSearchPictureBook
             }
             catch(JsonSerializationException)
             {
-                keyWord = wc.DownloadString(url + "&keyword=" + tbFreeWord.Text + "&type=" +
-                        cbClass.SelectedIndex + "&max=" + 10);
-                jsonKeyWord = JsonConvert.DeserializeObject<Rootobject>(keyWord);
-
                 try
                 {
-                    
+                    keyWord = wc.DownloadString(newUrl +  "&max=" + 10);
+                    jsonKeyWord = JsonConvert.DeserializeObject<Rootobject>(keyWord);
                 }
                 catch (JsonSerializationException)
                 {
-                    
+                    jsonKeyWord_only = JsonConvert.DeserializeObject<Rootobject_only>(keyWord);
+                    OnlyItem(jsonKeyWord_only);
+                    return;
                 }
             }
             catch (Exception)
@@ -96,13 +98,36 @@ namespace SweetsSearchPictureBook
             ItemInfo();
         }
 
-        //アイテム数が0の時
+        //アイテム数が0個の時
         public void ItemCount()
         {
             if (int.Parse(jsonKeyWord.count) == 0)
             {
                 MessageBox.Show("見つかりませんでした");
                 return;
+            }
+        }
+
+        //アイテム数が1つのとき
+        public void OnlyItem(Rootobject_only json)
+        {
+            btItemUrl_1.IsEnabled = true;                     
+            tbItemName_1.Text = json.item.name.ToString();
+            BitmapImage imageSource_17 = new BitmapImage(new Uri(json.item.image));
+            pbItemImage_1.Source = imageSource_17;
+
+            var a = json.item.price.ToString();
+
+            if (json.item.price.ToString() != "{}")
+            {
+                if (json.item.price.ToString() != "0")
+                {
+                    tbItemPrice_1.Text = json.item.price.ToString() + "円";
+                }    
+            }
+            else
+            {
+                tbItemPrice_1.Text = "データなし";
             }
         }
 
@@ -195,8 +220,6 @@ namespace SweetsSearchPictureBook
                 
             }
             
-
-
             Image[] pbItemImage = { pbItemImage_1, pbItemImage_2, pbItemImage_3, pbItemImage_4, pbItemImage_5,
                                         pbItemImage_6,pbItemImage_7,pbItemImage_8,pbItemImage_9,pbItemImage_10,
                                         pbItemImage_11,pbItemImage_12,pbItemImage_13,pbItemImage_14,pbItemImage_15,
@@ -207,16 +230,10 @@ namespace SweetsSearchPictureBook
                                         imageSource_11,imageSource_12,imageSource_13,imageSource_14,imageSource_15,
                                         imageSource_16};
 
-
-
             for (int i = 0; i < int.Parse(jsonKeyWord.count); i++)
             {
                 pbItemImage[i].Source = imageSorce[i];
             }
-
-
-            //IndexOutOfRangeException
-
         }
 
         //アイテム情報クリア
@@ -247,13 +264,7 @@ namespace SweetsSearchPictureBook
             }
         }
 
-        //アイテムが1つの時
-        public void JsonOnlyOne(Item json)
-        {
-            tbItemName_1.Text = json.name;
-        }
-
-        //インフォメーションボタン
+        //インフォメーションボタン(message box)
         private void Button_Infomation(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("・値段が データなし となる場合がありますがご了承ください。\n" +
@@ -363,9 +374,24 @@ namespace SweetsSearchPictureBook
             itemWindow.Show();
         }
 
+        //トグルボタンイベント(チェック時)
         private void toggleBtArea_Checked(object sender, RoutedEventArgs e)
         {
-            //MessageBox.Show("オンです");
+            MessageBox.Show("地域限定検索を使用する場合は他の検索機能(キーワード検索・ジャンル検索)が使用できません。\n" +
+                            "地域限定検索のみ使用可能です。");
+            cbArea.IsEnabled = true;
+            cbArea.SelectedIndex = 1;
+            cbClass.IsEnabled = false;
+            tbFreeWord.IsEnabled = false;
+        }
+
+        //トグルボタンイベント(チェック外れたとき)
+        private void toggleBtArea_Unchecked(object sender, RoutedEventArgs e)
+        {
+            cbArea.IsEnabled = false;
+            cbArea.SelectedIndex = 0;
+            cbClass.IsEnabled = true;
+            tbFreeWord.IsEnabled = true;
         }
     }
 }

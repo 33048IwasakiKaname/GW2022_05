@@ -18,7 +18,13 @@ namespace SweetsSearchPictureBook
         public string count { get; set; }
     }
 
-    
+    public class Rootobject_only
+    {
+        public Item item { get; set; }
+        public string status { get; set; }
+        public string count { get; set; }
+    }
+
     public class Item
     {
         public string id { get; set; }

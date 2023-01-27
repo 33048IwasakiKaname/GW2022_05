@@ -153,13 +153,19 @@
                     <GradientStop Color="#FFBBBBBB"/>
                 </LinearGradientBrush>
             </Button.Background>
-            <Label Content="検索" Margin="40,-10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="58" Width="110" FontSize="38" Foreground="#DDFFFFFF" />
+            <Grid>
+                <Label Content="検索" Margin="40,-10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="58" Width="110" FontSize="38" Foreground="#DDFFFFFF" />
+                <materialDesign:PackIcon Kind="Search" Height="56" Width="59" Grid.Column="1" Margin="-12,-7"/>           
+            </Grid>
+            
         </Button>
-        <materialDesign:PackIcon Kind="Search" Height="56" Width="59" Grid.Column="1" Margin="635,42,0,0"/>
+        
 
-        <Label Content="分類：" HorizontalAlignment="Left" Margin="12,168,0,0" VerticalAlignment="Top" FontSize="25" Height="42" Width="78"/>
-        <Label Content="地域限定：" HorizontalAlignment="Left" Margin="14,276,0,0" VerticalAlignment="Top" FontSize="22" Height="38" Width="120"/>
-        <ComboBox x:Name="cbClass" SelectedIndex="0" HorizontalAlignment="Left" Margin="54,210,0,0" VerticalAlignment="Top" Width="152" Height="32" FontSize="20">
+        <Label Content="" HorizontalAlignment="Left" Margin="19,122,0,0" VerticalAlignment="Top" Height="308" Width="220" Background="#FFFFF4D8" BorderBrush="Black" BorderThickness="2"/>
+
+        <Label Content="分類：" HorizontalAlignment="Left" Margin="25,186,0,0" VerticalAlignment="Top" FontSize="25" Height="42" Width="78"/>
+        <Label Content="地域限定：" HorizontalAlignment="Left" Margin="27,294,0,0" VerticalAlignment="Top" FontSize="22" Height="38" Width="120"/>
+        <ComboBox x:Name="cbClass" SelectedIndex="0" HorizontalAlignment="Left" Margin="67,228,0,0" VerticalAlignment="Top" Width="152" Height="32" FontSize="20">
             <ComboBoxItem Content="すべて"/>
             <ComboBoxItem Content="スナック"/>
             <ComboBoxItem Content="チョコレート"/>
@@ -167,7 +173,7 @@
             <ComboBoxItem Content="飴・ガム"/>
             <ComboBoxItem Content="せんべい・和風"/>
         </ComboBox>
-        <ComboBox x:Name="cbArea" HorizontalAlignment="Left" SelectedIndex="0" Margin="54,314,0,0" VerticalAlignment="Top" Width="152" Height="32" FontSize="20">
+        <ComboBox x:Name="cbArea" HorizontalAlignment="Left" SelectedIndex="0" Margin="67,332,0,0" VerticalAlignment="Top" Width="152" Height="32" FontSize="20">
             <ComboBoxItem Content="指定なし"/>
             <ComboBoxItem Content="北海道"/>
             <ComboBoxItem Content="東北"/>
@@ -187,8 +193,9 @@
             <materialDesign:PackIcon Kind="AlertCircleOutline" Width="50" Height="50"/>
         </Button>
         <Button x:Name="buttonCloseWin1" Content="閉じる" Grid.Column="1" HorizontalAlignment="Left" Margin="967,722,0,0" VerticalAlignment="Top" Width="102" Height="49" Click="ButtonCloseWin1_Click" Background="#FFBB7D59" BorderBrush="Black" BorderThickness="1"/>
-        <Border BorderBrush="Black" BorderThickness="2" HorizontalAlignment="Left" Height="573" Margin="250,122,0,0" VerticalAlignment="Top" Width="1183" Grid.ColumnSpan="2"/>
-        <TextBlock HorizontalAlignment="Left" Margin="139,285,0,0" TextWrapping="Wrap" Text=" " VerticalAlignment="Top" Background="#FFD1D1D1" Height="29" Width="44"/>
-        <ToggleButton x:Name="toggleBtArea" IsChecked="False" Margin="134,281,157,467" Checked="toggleBtArea_Checked" Background="#FFA5F2FF" BorderBrush="Black" mah:ControlsHelper.FocusBorderBrush="{x:Null}"/>
+        
+        <ToggleButton x:Name="toggleBtArea" IsChecked="False" Margin="147,299,144,449" Checked="toggleBtArea_Checked" Background="#FFA5F2FF" BorderBrush="Black" mah:ControlsHelper.FocusBorderBrush="{x:Null}" Unchecked="toggleBtArea_Unchecked"/>
+
+
     </Grid>
 </Window>

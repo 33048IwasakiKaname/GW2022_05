@@ -21,6 +21,7 @@ namespace SweetsSearchPictureBook
     public partial class ItemWindow : Window
     {
         public Rootobject jsonKeyWord = new Rootobject();
+        public Rootobject_only jsonKeyWord_only = new Rootobject_only();
         public string url,keyword;
         public int num;
         public string word;
@@ -39,13 +40,21 @@ namespace SweetsSearchPictureBook
         private void Window_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             keyword = Window1.keyWord;
-            jsonKeyWord = JsonConvert.DeserializeObject<Rootobject>(keyword);
 
             try
-            {
+            {               
+                jsonKeyWord = JsonConvert.DeserializeObject<Rootobject>(keyword);
                 ItemInfo();
                 Check();
                 NullChecker();  
+            }
+            catch (JsonSerializationException)
+            {
+                jsonKeyWord_only = JsonConvert.DeserializeObject<Rootobject_only>(keyword);
+                OnlyItem(jsonKeyWord_only);
+                NullCheckerOnly(jsonKeyWord_only);
+                CheckOnly(jsonKeyWord_only);
+                return;
             }
             catch (IndexOutOfRangeException)
             {
@@ -63,7 +72,7 @@ namespace SweetsSearchPictureBook
             win1.tbItemPrice_1.Text = "変更しました";
             this.Close();
         }
-
+        
         //アイテム情報
         public void ItemInfo()
         {
@@ -75,7 +84,7 @@ namespace SweetsSearchPictureBook
             objTag = objTag.Replace(Environment.NewLine, "");
             itemTag.Text = objTag.Replace("[", "").Replace("]", "").Replace("\"", "");  
         }
-
+        
         //nullかどうかチェック
         public void NullChecker()
         {
@@ -100,7 +109,7 @@ namespace SweetsSearchPictureBook
                 itemPrice.Content = "データなし";
             }
         }
-
+     
         //ローマ字を日本語に変換
         public string Check()
         {
@@ -112,6 +121,68 @@ namespace SweetsSearchPictureBook
                 case "senbei":
                     itemType.Content = "せんべい";
                     break;                
+                case "snack":
+                    itemType.Content = "スナック";
+                    break;
+                case "chocolate":
+                    itemType.Content = "チョコレート";
+                    break;
+                case "candy":
+                    itemType.Content = "キャンディー";
+                    break;
+                default:
+                    break;
+            }
+            return "";
+        }
+
+        //アイテム情報(データが一つのみ)
+        public void OnlyItem(Rootobject_only json)
+        {
+            BitmapImage imageSource = new BitmapImage(new Uri(json.item.image));
+            itemImage.Source = imageSource;
+            snackName.Text = json.item.name;
+            var objTag = json.item.tags.tag.ToString();
+            objTag = objTag.Replace(Environment.NewLine, "");
+            itemTag.Text = objTag.Replace("[", "").Replace("]", "").Replace("\"", "");
+        }
+
+        //nullかどうかチェック(データ一つのみ)
+        public void NullCheckerOnly(Rootobject_only json)
+        {
+            if (json.item.maker.ToString() != "{}")
+            {
+                itemMaker.Content = json.item.maker;
+            }
+            else
+            {
+                itemMaker.Content = "メーカー不明";
+            }
+
+            if (json.item.price.ToString() != "{}")
+            {
+                if (json.item.price.ToString() != "0")
+                {
+                    itemPrice.Content = json.item.price + "円";
+                }
+            }
+            else
+            {
+                itemPrice.Content = "データなし";
+            }
+        }
+
+        //ローマ字を日本語に変換(データが一つの時)
+        public string CheckOnly(Rootobject_only json)
+        {
+            switch (json.item.type.ToString())
+            {
+                case "cookie":
+                    itemType.Content = "クッキー";
+                    break;
+                case "senbei":
+                    itemType.Content = "せんべい";
+                    break;
                 case "snack":
                     itemType.Content = "スナック";
                     break;
