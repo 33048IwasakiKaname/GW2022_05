@@ -29,9 +29,8 @@ namespace SweetsSearchPictureBook
         private void Search_Click(object sender, RoutedEventArgs e)
         {
             Window1 win1 = new Window1();
-            win1.Show();
             //win1.Topmost = true;
-            //IsEnabled = false;
+            win1.ShowDialog();           
         }
 
         private void ButtonClose_Click(object sender, RoutedEventArgs e)

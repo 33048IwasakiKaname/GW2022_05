@@ -34,7 +34,7 @@ namespace SweetsSearchPictureBook
         public static string keyWord;
         public string newUrl;
         
-
+        //ウィンドウロード時
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             cbArea.IsEnabled = false;
@@ -52,7 +52,12 @@ namespace SweetsSearchPictureBook
         public void Search_Click(object sender, RoutedEventArgs e)
         {
             Clear();
+            itemScrollViewer.ScrollToTop();
             newUrl = url + "&keyword=" + tbFreeWord.Text + "&type=" + cbClass.SelectedIndex;
+            if (toggleBtSort.IsChecked == true && toggleBtArea.IsChecked == false)
+            {
+                newUrl += "&order=r";
+            }
             try
             {
                 if (cbArea.SelectedIndex != 0)
@@ -72,15 +77,22 @@ namespace SweetsSearchPictureBook
             catch(JsonSerializationException)
             {
                 try
-                {
+                {   //カレー専用
                     keyWord = wc.DownloadString(newUrl +  "&max=" + 10);
                     jsonKeyWord = JsonConvert.DeserializeObject<Rootobject>(keyWord);
                 }
                 catch (JsonSerializationException)
                 {
-                    jsonKeyWord_only = JsonConvert.DeserializeObject<Rootobject_only>(keyWord);
-                    OnlyItem(jsonKeyWord_only);
-                    return;
+                    try
+                    {   //jsonデータが1つしかなかったとき
+                        jsonKeyWord_only = JsonConvert.DeserializeObject<Rootobject_only>(keyWord);
+                        OnlyItem(jsonKeyWord_only);
+                        return;
+                    }
+                    catch (JsonSerializationException)
+                    {
+                        MessageBox.Show("もう一度入力しなおすか、検索ワードを変更してください。");
+                    }
                 }
             }
             catch (Exception)
@@ -92,6 +104,8 @@ namespace SweetsSearchPictureBook
             if (int.Parse(jsonKeyWord.count) == 0)
             {
                 MessageBox.Show("見つかりませんでした");
+                tbFreeWord.Text = null;
+                Search_Click(sender,e);
                 return;
             }
 
@@ -267,7 +281,8 @@ namespace SweetsSearchPictureBook
         //インフォメーションボタン(message box)
         private void Button_Infomation(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("・値段が データなし となる場合がありますがご了承ください。\n" +
+            MessageBox.Show("・お菓子の表示が遅れる場合がありますが、そのままでお待ちください\n" +
+                "・値段が データなし となる場合がありますがご了承ください。\n" +
                 "・地域限定を指定した場合はキーワード検索は無効になり、その地域のお菓子がオールジャンルで表示されます。\n" + 
                 "・まれに指定ワードに沿わない結果が表示される場合があります。");
         }
@@ -278,120 +293,126 @@ namespace SweetsSearchPictureBook
             this.Close();
         }
         
-        private void BtItemUrl1_Click(object sender, RoutedEventArgs e)
+        //アイテムウィンドウ表示
+        public void ItemWindowShow(int num)
         {
-            itemWindow.num = 0;
-            itemWindow.Show();
+            itemWindow.num = num;
+            //itemWindow.Topmost = true;
+            itemWindow.ShowDialog();
         }
 
-        private void BtItemUrl2_Click(object sender, RoutedEventArgs e)
+        //地域限定トグルボタンイベント(チェック時)
+        private void ToggleBtArea_Checked(object sender, RoutedEventArgs e)
         {
-            itemWindow.num = 1;
-            itemWindow.Show();
-        }
-
-        private void BtItemUrl3_Click(object sender, RoutedEventArgs e)
-        {
-            itemWindow.num = 2;
-            itemWindow.Show();
-        }
-
-        private void BtItemUrl4_Click(object sender, RoutedEventArgs e)
-        {
-            itemWindow.num = 3;
-            itemWindow.Show();
-        }
-
-        private void BtItemUrl5_Click(object sender, RoutedEventArgs e)
-        {
-            itemWindow.num = 4;
-            itemWindow.Show();
-        }
-
-        private void BtItemUrl6_Click(object sender, RoutedEventArgs e)
-        {
-            itemWindow.num = 5;
-            itemWindow.Show();
-        }
-
-        private void BtItemUrl7_Click(object sender, RoutedEventArgs e)
-        {
-            itemWindow.num = 6;
-            itemWindow.Show();
-        }
-
-        private void BtItemUrl8_Click(object sender, RoutedEventArgs e)
-        {
-            itemWindow.num = 7;
-            itemWindow.Show();
-        }
-
-        private void BtItemUrl9_Click(object sender, RoutedEventArgs e)
-        {
-            itemWindow.num = 8;
-            itemWindow.Show();
-        }
-
-        private void BtItemUrl10_Click(object sender, RoutedEventArgs e)
-        {
-            itemWindow.num = 9;
-            itemWindow.Show();
-        }
-
-        private void BtItemUrl11_Click(object sender, RoutedEventArgs e)
-        {
-            itemWindow.num = 10;
-            itemWindow.Show();
-        }
-
-        private void BtItemUrl12_Click(object sender, RoutedEventArgs e)
-        {
-            itemWindow.num = 11;
-            itemWindow.Show();
-        }
-
-        private void btItemUrl13_Click(object sender, RoutedEventArgs e)
-        {
-            itemWindow.num = 12;
-            itemWindow.Show();
-        }
-
-        private void BtItemUrl14_Click(object sender, RoutedEventArgs e)
-        {
-            itemWindow.num = 13;
-            itemWindow.Show();
-        }
-
-        private void BtItemUrl15_Click(object sender, RoutedEventArgs e)
-        {
-            itemWindow.num = 14;
-            itemWindow.Show();
-        }
-
-        private void BtItemUrl16_Click(object sender, RoutedEventArgs e)
-        {
-            itemWindow.num = 15;
-            itemWindow.Show();
-        }
-
-        //トグルボタンイベント(チェック時)
-        private void toggleBtArea_Checked(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("地域限定検索を使用する場合は他の検索機能(キーワード検索・ジャンル検索)が使用できません。\n" +
-                            "地域限定検索のみ使用可能です。");
+            MessageBox.Show("地域限定検索を使用する場合は他の検索機能(キーワード検索・ジャンル検索・並び替え)が" +
+                            "使用できません。\n" +　"地域限定検索のみ使用可能です。");
             cbArea.IsEnabled = true;
             cbArea.SelectedIndex = 1;
             cbClass.IsEnabled = false;
+            cbClass.SelectedIndex = 0;
             tbFreeWord.IsEnabled = false;
+            toggleBtSort.IsChecked = false;
+            toggleBtSort.IsEnabled = false;
+            Search_Click(sender,e);
         }
 
-        //トグルボタンイベント(チェック外れたとき)
-        private void toggleBtArea_Unchecked(object sender, RoutedEventArgs e)
+        //地域限定トグルボタンイベント(チェック外れたとき)
+        private void ToggleBtArea_Unchecked(object sender, RoutedEventArgs e)
         {
             cbArea.IsEnabled = false;
             cbArea.SelectedIndex = 0;
             cbClass.IsEnabled = true;
             tbFreeWord.IsEnabled = true;
+            toggleBtSort.IsEnabled = true;
+
+            Search_Click(sender, e);
+        }
+
+        //並び替えトグルボタンイベント(チェック時)
+        private void ToggleBtSort_Checked(object sender, RoutedEventArgs e)
+        {
+            Search_Click(sender,e);
+        }
+
+
+        private void BtItemUrl1_Click(object sender, RoutedEventArgs e)
+        {
+            ItemWindowShow(0);
+        }
+
+        private void BtItemUrl2_Click(object sender, RoutedEventArgs e)
+        {
+            ItemWindowShow(1);
+        }
+
+        private void BtItemUrl3_Click(object sender, RoutedEventArgs e)
+        {
+            ItemWindowShow(2);
+        }
+
+        private void BtItemUrl4_Click(object sender, RoutedEventArgs e)
+        {
+            ItemWindowShow(3);
+        }
+
+        private void BtItemUrl5_Click(object sender, RoutedEventArgs e)
+        {
+            ItemWindowShow(4);
+        }
+
+        private void BtItemUrl6_Click(object sender, RoutedEventArgs e)
+        {
+            ItemWindowShow(5);
+        }
+
+        private void BtItemUrl7_Click(object sender, RoutedEventArgs e)
+        {
+            ItemWindowShow(6);
+        }
+
+        private void BtItemUrl8_Click(object sender, RoutedEventArgs e)
+        {
+            ItemWindowShow(7);
+        }
+
+        private void BtItemUrl9_Click(object sender, RoutedEventArgs e)
+        {
+            ItemWindowShow(8);
+        }
+
+        private void BtItemUrl10_Click(object sender, RoutedEventArgs e)
+        {
+            ItemWindowShow(9);
+        }
+
+        private void BtItemUrl11_Click(object sender, RoutedEventArgs e)
+        {
+            ItemWindowShow(10);
+        }
+
+        private void BtItemUrl12_Click(object sender, RoutedEventArgs e)
+        {
+            ItemWindowShow(11);
+        }
+
+        private void BtItemUrl13_Click(object sender, RoutedEventArgs e)
+        {
+            ItemWindowShow(12);
+        }
+
+        private void BtItemUrl14_Click(object sender, RoutedEventArgs e)
+        {
+            ItemWindowShow(13);
+        }
+
+        private void BtItemUrl15_Click(object sender, RoutedEventArgs e)
+        {
+            ItemWindowShow(14);
+        }
+
+        private void BtItemUrl16_Click(object sender, RoutedEventArgs e)
+        {
+            ItemWindowShow(15);
         }
     }
 }

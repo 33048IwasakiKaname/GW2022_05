@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SweetsSearchPictureBook"
         mc:Ignorable="d"
-        Title="ItemWindow" Height="331.831" Width="560.97" Closing="ItemWindow_Closing" IsVisibleChanged="Window_IsVisibleChanged">
+        Title="お菓子詳細" Height="331.831" Width="560.97" Closing="ItemWindow_Closing" IsVisibleChanged="Window_IsVisibleChanged">
     <Window.Background>
         <ImageBrush ImageSource="1021018_marshmallow_pattern_1.jpg" Stretch="None"/>
     </Window.Background>
@@ -18,9 +18,9 @@
         <Label Name="itemMaker" Content="明治製菓" HorizontalAlignment="Left" Margin="131,141,0,0" VerticalAlignment="Top" FontSize="20"/>
         <Label Name="itemType" Content="チョコレート" HorizontalAlignment="Left" Margin="131,101,0,0" VerticalAlignment="Top" FontSize="20"/>
         <Label Name="itemPrice" Content="100円" HorizontalAlignment="Left" Margin="131,182,0,0" VerticalAlignment="Top" FontSize="20" RenderTransformOrigin="0.919,0.395"/>
-        <TextBlock x:Name="itemTag" Text="グミ,チョコ" HorizontalAlignment="Left" Margin="122,228,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="20" Width="285" Height="63"/>
+        <TextBlock x:Name="itemTag" Text=" グミ,チョコ" HorizontalAlignment="Left" Margin="131,228,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="20" Width="285" Height="63"/>
         <TextBlock Name="snackName" Text="お菓子の名前" HorizontalAlignment="Center" Margin="18,10,241,0" TextWrapping="Wrap"
-                   VerticalAlignment="Top" FontSize="27" Height="89" Width="294" Background="#FFF5A679" TextAlignment="Center"/>
+                   VerticalAlignment="Top" FontSize="27" Height="89" Width="294" Background="#FFFFDAC5" TextAlignment="Center"/>
         <Button x:Name="buttonCloseItemWin" Content="閉じる" HorizontalAlignment="Left" Margin="457,225,0,0" VerticalAlignment="Top"
                 Width="68" Height="27" Click="ButtonCloseItemWin_Click" Background="#FFEEB984" BorderBrush="Black" BorderThickness="1"/>
 

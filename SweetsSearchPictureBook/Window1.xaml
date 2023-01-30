@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:SweetsSearchPictureBook"
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls" x:Class="SweetsSearchPictureBook.Window1"
         mc:Ignorable="d"
-        Title="Window1" Height="812.47" Width="1450.948" Loaded="Window_Loaded">
+        Title="検索システム" Height="812.47" Width="1450.948" Loaded="Window_Loaded">
     <Window.Background>
         <ImageBrush ImageSource="29277.jpg"/>
     </Window.Background>
@@ -115,7 +115,7 @@
                 <TextBlock x:Name="tbItemName_12" Grid.Column="3" Grid.Row="9" HorizontalAlignment="Left" Margin="10,4,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="56" Width="235" FontSize="20"/>
                 <TextBlock x:Name="tbItemPrice_12" Grid.Column="3" Grid.Row="10" HorizontalAlignment="Left" Margin="10,4,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="56" Width="235" FontSize="18" Grid.RowSpan="2"/>
 
-                <Button x:Name="btItemUrl_13" Grid.Column="0" Grid.Row="12" Background="White" Height="Auto" BorderBrush="#FFFF9C3A" BorderThickness="10" Click="btItemUrl13_Click">
+                <Button x:Name="btItemUrl_13" Grid.Column="0" Grid.Row="12" Background="White" Height="Auto" BorderBrush="#FFFF9C3A" BorderThickness="10" Click="BtItemUrl13_Click">
                     <Image x:Name="pbItemImage_13" HorizontalAlignment="Center" Height="200" VerticalAlignment="Top" Width="200"/>
                 </Button>
                 <TextBlock x:Name="tbItemName_13" Grid.Column="0" Grid.Row="13" HorizontalAlignment="Left" Margin="10,4,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="56" Width="228" FontSize="20"/>
@@ -142,7 +142,7 @@
             </Grid>
         </ScrollViewer>
 
-        <Label Content="フリーキーワード検索" FontSize="35" FontWeight="ExtraBlack" BorderBrush="Black" HorizontalAlignment="Center" BorderThickness="4" Margin="37,10,22,708" Background="White"/>
+        <Label Content="フリーキーワード検索" FontSize="35" FontWeight="ExtraBlack" BorderBrush="Black" HorizontalAlignment="Center" BorderThickness="4" Margin="37,10,22,708" Background="#FFFFE6B9"/>
         <TextBox x:Name="tbFreeWord" BorderBrush="Black" BorderThickness="2" HorizontalAlignment="Left" Height="49" Margin="121,42,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="504" FontSize="30" Grid.Column="1" Background="White"
                  materialDesign:HintAssist.Hint="お菓子の名前" InputMethod.PreferredImeState="On"/>
         <Button x:Name="Search" HorizontalAlignment="Left" Margin="638,44,0,0" VerticalAlignment="Top" Width="150" 
@@ -155,16 +155,17 @@
             </Button.Background>
             <Grid>
                 <Label Content="検索" Margin="40,-10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="58" Width="110" FontSize="38" Foreground="#DDFFFFFF" />
-                <materialDesign:PackIcon Kind="Search" Height="56" Width="59" Grid.Column="1" Margin="-12,-7"/>           
+                <materialDesign:PackIcon Kind="Search" Height="56" Width="59" Grid.Column="1" Margin="-12,-7"/>
             </Grid>
-            
-        </Button>
-        
 
-        <Label Content="" HorizontalAlignment="Left" Margin="19,122,0,0" VerticalAlignment="Top" Height="308" Width="220" Background="#FFFFF4D8" BorderBrush="Black" BorderThickness="2"/>
+        </Button>
+
+
+        <Label Content="" HorizontalAlignment="Left" Margin="19,155,0,0" VerticalAlignment="Top" Height="332" Width="220" Background="#FFFFF4D8" BorderBrush="Black" BorderThickness="2"/>
 
         <Label Content="分類：" HorizontalAlignment="Left" Margin="25,186,0,0" VerticalAlignment="Top" FontSize="25" Height="42" Width="78"/>
         <Label Content="地域限定：" HorizontalAlignment="Left" Margin="27,294,0,0" VerticalAlignment="Top" FontSize="22" Height="38" Width="120"/>
+        <Label Content="並び替え&#xa;   (ランダム)：" HorizontalAlignment="Left" Margin="37,403,0,0" VerticalAlignment="Top" FontSize="22" Height="67" Width="145"/>
         <ComboBox x:Name="cbClass" SelectedIndex="0" HorizontalAlignment="Left" Margin="67,228,0,0" VerticalAlignment="Top" Width="152" Height="32" FontSize="20">
             <ComboBoxItem Content="すべて"/>
             <ComboBoxItem Content="スナック"/>
@@ -193,8 +194,10 @@
             <materialDesign:PackIcon Kind="AlertCircleOutline" Width="50" Height="50"/>
         </Button>
         <Button x:Name="buttonCloseWin1" Content="閉じる" Grid.Column="1" HorizontalAlignment="Left" Margin="967,722,0,0" VerticalAlignment="Top" Width="102" Height="49" Click="ButtonCloseWin1_Click" Background="#FFBB7D59" BorderBrush="Black" BorderThickness="1"/>
-        
-        <ToggleButton x:Name="toggleBtArea" IsChecked="False" Margin="147,299,144,449" Checked="toggleBtArea_Checked" Background="#FFA5F2FF" BorderBrush="Black" mah:ControlsHelper.FocusBorderBrush="{x:Null}" Unchecked="toggleBtArea_Unchecked"/>
+
+        <ToggleButton x:Name="toggleBtArea" IsChecked="False" Margin="147,294,144,454" Checked="ToggleBtArea_Checked" Background="#FFA5F2FF" BorderBrush="Black" mah:ControlsHelper.FocusBorderBrush="{x:Null}" Unchecked="ToggleBtArea_Unchecked"/>
+        <ToggleButton x:Name="toggleBtSort" IsChecked="False" Margin="147,432,127,311" Background="#FFA5F2FF" BorderBrush="Black" mah:ControlsHelper.FocusBorderBrush="{x:Null}" RenderTransformOrigin="1.101,0.56" Checked="ToggleBtSort_Checked"/>
+
 
 
     </Grid>

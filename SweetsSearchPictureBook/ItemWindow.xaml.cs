@@ -68,8 +68,6 @@ namespace SweetsSearchPictureBook
 
         private void ButtonCloseItemWin_Click(object sender, RoutedEventArgs e)
         {
-            var win1 = new Window1();
-            win1.tbItemPrice_1.Text = "変更しました";
             this.Close();
         }
         
