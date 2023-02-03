@@ -33,10 +33,13 @@ namespace SweetsSearchPictureBook
 
         public static string keyWord;
         public string newUrl;
+        public int changeNum = 0;
+        public int checkNumber = 0;
         
         //ウィンドウロード時
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            checkNumber = 1;
             cbArea.IsEnabled = false;
             keyWord = wc.DownloadString(url);
             jsonKeyWord = JsonConvert.DeserializeObject<Rootobject>(keyWord);
@@ -51,6 +54,11 @@ namespace SweetsSearchPictureBook
         //検索ボタンクリック
         public void Search_Click(object sender, RoutedEventArgs e)
         {
+            ItemSearch();
+        }
+
+        public void ItemSearch()
+        {
             Clear();
             itemScrollViewer.ScrollToTop();
             newUrl = url + "&keyword=" + tbFreeWord.Text + "&type=" + cbClass.SelectedIndex;
@@ -62,7 +70,9 @@ namespace SweetsSearchPictureBook
             {
                 if (cbArea.SelectedIndex != 0)
                 {
-                    newUrl = newUrl + "&type=99" + "&keyword=" + cbArea.Text;
+                    var a = cbArea.SelectedItem.ToString();
+                    a = a.Replace("System.Windows.Controls.ComboBoxItem:","");
+                    newUrl = newUrl + "&type=99" + "&keyword=" + a;
                 }
 
                 keyWord = wc.DownloadString(newUrl);
@@ -74,11 +84,11 @@ namespace SweetsSearchPictureBook
                 MessageBox.Show("問題が発生しました。\n別のワードを入力してください。", "検索エラー",
                                 MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            catch(JsonSerializationException)
+            catch (JsonSerializationException)
             {
                 try
                 {   //カレー専用
-                    keyWord = wc.DownloadString(newUrl +  "&max=" + 10);
+                    keyWord = wc.DownloadString(newUrl + "&max=" + 10);
                     jsonKeyWord = JsonConvert.DeserializeObject<Rootobject>(keyWord);
                 }
                 catch (JsonSerializationException)
@@ -105,7 +115,7 @@ namespace SweetsSearchPictureBook
             {
                 MessageBox.Show("見つかりませんでした");
                 tbFreeWord.Text = null;
-                Search_Click(sender,e);
+                ItemSearch();
                 return;
             }
 
@@ -302,30 +312,32 @@ namespace SweetsSearchPictureBook
         }
 
         //地域限定トグルボタンイベント(チェック時)
-        private void ToggleBtArea_Checked(object sender, RoutedEventArgs e)
+        public void ToggleBtArea_Checked(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("地域限定検索を使用する場合は他の検索機能(キーワード検索・ジャンル検索・並び替え)が" +
                             "使用できません。\n" +　"地域限定検索のみ使用可能です。");
-            cbArea.IsEnabled = true;
-            cbArea.SelectedIndex = 1;
+            cbArea.IsEnabled = true;           
             cbClass.IsEnabled = false;
             cbClass.SelectedIndex = 0;
             tbFreeWord.IsEnabled = false;
             toggleBtSort.IsChecked = false;
-            toggleBtSort.IsEnabled = false;
-            Search_Click(sender,e);
+            toggleBtSort.IsEnabled = false;         
+            cbArea.SelectedIndex = 1;
+            changeNum = 1;
+            ItemSearch();
         }
 
         //地域限定トグルボタンイベント(チェック外れたとき)
         private void ToggleBtArea_Unchecked(object sender, RoutedEventArgs e)
         {
+            changeNum = 0;
             cbArea.IsEnabled = false;
             cbArea.SelectedIndex = 0;
             cbClass.IsEnabled = true;
             tbFreeWord.IsEnabled = true;
             toggleBtSort.IsEnabled = true;
 
-            Search_Click(sender, e);
+            ItemSearch();
         }
 
         //並び替えトグルボタンイベント(チェック時)
@@ -414,5 +426,23 @@ namespace SweetsSearchPictureBook
         {
             ItemWindowShow(15);
         }
+
+        private void cbClass_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (checkNumber != 0)
+            {
+                ItemSearch();
+            }   
+        }
+
+        private void cbArea_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {         
+            if (toggleBtArea.IsChecked == true && changeNum == 1)
+            {
+                ItemSearch();
+            }
+        }
+
+        
     }
 }

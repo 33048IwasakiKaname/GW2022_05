@@ -166,7 +166,7 @@
         <Label Content="分類：" HorizontalAlignment="Left" Margin="25,186,0,0" VerticalAlignment="Top" FontSize="25" Height="42" Width="78"/>
         <Label Content="地域限定：" HorizontalAlignment="Left" Margin="27,294,0,0" VerticalAlignment="Top" FontSize="22" Height="38" Width="120"/>
         <Label Content="並び替え&#xa;   (ランダム)：" HorizontalAlignment="Left" Margin="37,403,0,0" VerticalAlignment="Top" FontSize="22" Height="67" Width="145"/>
-        <ComboBox x:Name="cbClass" SelectedIndex="0" HorizontalAlignment="Left" Margin="67,228,0,0" VerticalAlignment="Top" Width="152" Height="32" FontSize="20">
+        <ComboBox x:Name="cbClass" SelectedIndex="0" HorizontalAlignment="Left" Margin="67,228,0,0" VerticalAlignment="Top" Width="152" Height="32" FontSize="20" SelectionChanged="cbClass_SelectionChanged">
             <ComboBoxItem Content="すべて"/>
             <ComboBoxItem Content="スナック"/>
             <ComboBoxItem Content="チョコレート"/>
@@ -174,7 +174,9 @@
             <ComboBoxItem Content="飴・ガム"/>
             <ComboBoxItem Content="せんべい・和風"/>
         </ComboBox>
-        <ComboBox x:Name="cbArea" HorizontalAlignment="Left" SelectedIndex="0" Margin="67,332,0,0" VerticalAlignment="Top" Width="152" Height="32" FontSize="20">
+
+        <ToggleButton x:Name="toggleBtArea" IsChecked="False" Margin="147,294,144,454" Checked="ToggleBtArea_Checked" Background="#FFA5F2FF" BorderBrush="Black" mah:ControlsHelper.FocusBorderBrush="{x:Null}" Unchecked="ToggleBtArea_Unchecked"/>
+        <ComboBox x:Name="cbArea" HorizontalAlignment="Left" SelectedIndex="0" Margin="67,332,0,0" VerticalAlignment="Top" Width="152" Height="32" FontSize="20" SelectionChanged="cbArea_SelectionChanged">
             <ComboBoxItem Content="指定なし"/>
             <ComboBoxItem Content="北海道"/>
             <ComboBoxItem Content="東北"/>
@@ -195,8 +197,9 @@
         </Button>
         <Button x:Name="buttonCloseWin1" Content="閉じる" Grid.Column="1" HorizontalAlignment="Left" Margin="967,722,0,0" VerticalAlignment="Top" Width="102" Height="49" Click="ButtonCloseWin1_Click" Background="#FFBB7D59" BorderBrush="Black" BorderThickness="1"/>
 
-        <ToggleButton x:Name="toggleBtArea" IsChecked="False" Margin="147,294,144,454" Checked="ToggleBtArea_Checked" Background="#FFA5F2FF" BorderBrush="Black" mah:ControlsHelper.FocusBorderBrush="{x:Null}" Unchecked="ToggleBtArea_Unchecked"/>
+        
         <ToggleButton x:Name="toggleBtSort" IsChecked="False" Margin="147,432,127,311" Background="#FFA5F2FF" BorderBrush="Black" mah:ControlsHelper.FocusBorderBrush="{x:Null}" RenderTransformOrigin="1.101,0.56" Checked="ToggleBtSort_Checked"/>
+        <Border BorderBrush="Black" BorderThickness="2" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="573" Margin="250,122,0,0" VerticalAlignment="Top" Width="1183"/>
 
 
 

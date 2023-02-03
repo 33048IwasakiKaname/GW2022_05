@@ -28,9 +28,9 @@
             <ImageBrush ImageSource="チョコ垂れてる.jpeg"/>
         </Grid.Background>
 
-        <Label Content="お菓子検索システム" HorizontalAlignment="Left" Margin="27,31,0,0" VerticalAlignment="Top" Height="98" Width="369" FontSize="40" Foreground="#DDFFFFFF" FontFamily="UD Digi Kyokasho NP-B"/>
+        <Label Content="お菓子図鑑" HorizontalAlignment="Left" Margin="102,51,0,0" VerticalAlignment="Top" Height="98" Width="228" FontSize="40" Foreground="#DDFFFFFF" FontFamily="UD Digi Kyokasho NP-B"/>
         <Grid>
-            <Button x:Name="Search" HorizontalAlignment="Left" Margin="39,217,0,0" VerticalAlignment="Top" Width="330" Height="150" Click="Search_Click" FontSize="30" FontFamily="Snap ITC" Foreground="#DDB06F6F" Background="{x:Null}" BorderBrush="#FFFFDEDE" BorderThickness="3">
+            <Button x:Name="Search" HorizontalAlignment="Left" Margin="39,217,0,0" VerticalAlignment="Top" Width="330" Height="150" Click="Search_Click" FontSize="30" FontFamily="Snap ITC" Foreground="#DDB06F6F" Background="{x:Null}" BorderBrush="#FFFFD69A" BorderThickness="3">
                 <Grid>
                     <Image Margin="-17,-35,0,0" Height="221" Width="374" Source="チョコ　欠けてる　メインメニュー.png"/>
                     <Label Content="探す" FontFamily="HGSSoeiKakupoptai" FontSize="50" Foreground="#DD000000" Margin="40,40,0,0"/>

@@ -11,17 +11,17 @@
     </Window.Background>
     <Grid>
         <Image x:Name="itemImage" HorizontalAlignment="Left" Height="203" Margin="330,10,0,0" VerticalAlignment="Top" Width="207" Source="チロル3.jpg"/>
-        <Label Content="メーカー" HorizontalAlignment="Left" Margin="23,141,0,0" VerticalAlignment="Top" Height="33" Width="103" FontSize="20"/>
-        <Label Content="分類" HorizontalAlignment="Left" Margin="25,101,0,0" VerticalAlignment="Top" FontSize="20"/>
-        <Label Content="値段" HorizontalAlignment="Left" Margin="25,182,0,0" VerticalAlignment="Top" FontSize="20"/>
-        <Label Content="タグ" HorizontalAlignment="Left" Margin="25,224,0,0" VerticalAlignment="Top" FontSize="20"/>
-        <Label Name="itemMaker" Content="明治製菓" HorizontalAlignment="Left" Margin="131,141,0,0" VerticalAlignment="Top" FontSize="20"/>
-        <Label Name="itemType" Content="チョコレート" HorizontalAlignment="Left" Margin="131,101,0,0" VerticalAlignment="Top" FontSize="20"/>
-        <Label Name="itemPrice" Content="100円" HorizontalAlignment="Left" Margin="131,182,0,0" VerticalAlignment="Top" FontSize="20" RenderTransformOrigin="0.919,0.395"/>
-        <TextBlock x:Name="itemTag" Text=" グミ,チョコ" HorizontalAlignment="Left" Margin="131,228,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="20" Width="285" Height="63"/>
-        <TextBlock Name="snackName" Text="お菓子の名前" HorizontalAlignment="Center" Margin="18,10,241,0" TextWrapping="Wrap"
-                   VerticalAlignment="Top" FontSize="27" Height="89" Width="294" Background="#FFFFDAC5" TextAlignment="Center"/>
-        <Button x:Name="buttonCloseItemWin" Content="閉じる" HorizontalAlignment="Left" Margin="457,225,0,0" VerticalAlignment="Top"
+        <Label Content="メーカー" HorizontalAlignment="Left" Margin="22,173,0,0" VerticalAlignment="Top" Height="33" Width="103" FontSize="20"/>
+        <Label Content="分類" HorizontalAlignment="Left" Margin="24,138,0,0" VerticalAlignment="Top" FontSize="20"/>
+        <Label Content="値段" HorizontalAlignment="Left" Margin="24,206,0,0" VerticalAlignment="Top" FontSize="20"/>
+        <Label Content="タグ" HorizontalAlignment="Left" Margin="24,238,0,0" VerticalAlignment="Top" FontSize="20"/>
+        <Label Name="itemMaker" Content="明治製菓" HorizontalAlignment="Left" Margin="130,173,0,0" VerticalAlignment="Top" FontSize="20"/>
+        <Label Name="itemType" Content="チョコレート" HorizontalAlignment="Left" Margin="130,138,0,0" VerticalAlignment="Top" FontSize="20"/>
+        <Label Name="itemPrice" Content="100円" HorizontalAlignment="Left" Margin="130,203,0,0" VerticalAlignment="Top" FontSize="20" RenderTransformOrigin="0.919,0.395"/>
+        <TextBlock x:Name="itemTag" Text=" グミ,チョコ" HorizontalAlignment="Left" Margin="130,238,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="20" Width="285" Height="63"/>
+        <TextBlock Name="snackName" Text="お菓子の名前" HorizontalAlignment="Center" Margin="16,10,242,169" TextWrapping="Wrap"
+                   VerticalAlignment="Center" FontSize="27" Height="122" Width="295" Background="#FFFFDAC5" TextAlignment="Center"/>
+        <Button x:Name="buttonCloseItemWin" Content="閉じる" HorizontalAlignment="Left" Margin="463,264,0,0" VerticalAlignment="Top"
                 Width="68" Height="27" Click="ButtonCloseItemWin_Click" Background="#FFEEB984" BorderBrush="Black" BorderThickness="1"/>
 
 
