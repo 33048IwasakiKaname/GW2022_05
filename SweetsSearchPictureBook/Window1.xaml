@@ -195,11 +195,13 @@
             Style="{StaticResource MaterialDesignFloatingActionLightButton}" Grid.Column="1" Margin="826,35,217,690" Click="Button_Infomation" Width="Auto" Height="Auto" Background="#FFCBCBCB">
             <materialDesign:PackIcon Kind="AlertCircleOutline" Width="50" Height="50"/>
         </Button>
-        <Button x:Name="buttonCloseWin1" Content="閉じる" Grid.Column="1" HorizontalAlignment="Left" Margin="967,722,0,0" VerticalAlignment="Top" Width="102" Height="49" Click="ButtonCloseWin1_Click" Background="#FFBB7D59" BorderBrush="Black" BorderThickness="1"/>
+        <Button x:Name="buttonCloseWin1" Content="閉じる" HorizontalAlignment="Left" Margin="25,514,0,0" VerticalAlignment="Top" Width="102" Height="48" Click="ButtonCloseWin1_Click" Background="#FFBB7D59" BorderBrush="Black" BorderThickness="1"/>
 
-        
-        <ToggleButton x:Name="toggleBtSort" IsChecked="False" Margin="147,432,127,311" Background="#FFA5F2FF" BorderBrush="Black" mah:ControlsHelper.FocusBorderBrush="{x:Null}" RenderTransformOrigin="1.101,0.56" Checked="ToggleBtSort_Checked"/>
+
+        <ToggleButton x:Name="toggleBtSort" IsChecked="False" Margin="147,432,127,311" Background="#FFA5F2FF" BorderBrush="Black" mah:ControlsHelper.FocusBorderBrush="{x:Null}" RenderTransformOrigin="1.101,0.56" Checked="ToggleBtSort_Checked" Unchecked="toggleBtSort_Unchecked"/>
         <Border BorderBrush="Black" BorderThickness="2" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="573" Margin="250,122,0,0" VerticalAlignment="Top" Width="1183"/>
+        <Button x:Name="nextButton" Content="次のページ" Grid.Column="1" HorizontalAlignment="Left" Margin="955,720,0,0" VerticalAlignment="Top" Width="120" Height="51" Click="nextButton_Click"/>
+        <Button x:Name="returnButton" Content="前のページ" Grid.Column="1" HorizontalAlignment="Left" Margin="826,720,0,0" VerticalAlignment="Top" Width="108" Height="51" Click="returnButton_Click"/>
 
 
 

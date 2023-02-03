@@ -23,25 +23,30 @@ namespace SweetsSearchPictureBook
     /// </summary>
     public partial class Window1 : Window
     {
-        
-        public string url = "https://www.sysbird.jp/webapi/?apikey=guest&format=json&max=16";
+        public string url = "https://www.sysbird.jp/webapi/?apikey=guest&format=json&max=32";
 
         public WebClient wc = new WebClient();
         public static Rootobject jsonKeyWord = new Rootobject();
         public Rootobject_only jsonKeyWord_only = new Rootobject_only();
         public ItemWindow itemWindow = new ItemWindow();
 
-        public static string keyWord;
-        public string newUrl;
-        public int changeNum = 0;
-        public int checkNumber = 0;
-        
+        public static string keyWord; //テキストボックス内のテキスト
+        public string newUrl; //更新したURL
+        public int changeNum = 0; //地域限定コンボボックスの処理にしよう
+        public int checkNumber = 0; //ジャンルコンボボックスの処理に使用
+        public int min = 0; //jsonのmin値
+        public int max = 16; //jsonのmax値
+        public static int pageCount = 1; //現在のページ番号
+        public int itemMax = 32;
+        public int count = 0; //アイテムが16個以上かどうかで使用する値
+
         //ウィンドウロード時
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             checkNumber = 1;
             cbArea.IsEnabled = false;
             keyWord = wc.DownloadString(url);
+            keyWord = keyWord.Replace("\"type\":{}", "\"type\":\"データなし\"");
             jsonKeyWord = JsonConvert.DeserializeObject<Rootobject>(keyWord);
             ItemInfo();
         }
@@ -54,9 +59,14 @@ namespace SweetsSearchPictureBook
         //検索ボタンクリック
         public void Search_Click(object sender, RoutedEventArgs e)
         {
+            if (pageCount != 1)
+            {
+                returnButton_Click(sender, e);
+            }
             ItemSearch();
         }
 
+        //検索処理
         public void ItemSearch()
         {
             Clear();
@@ -111,15 +121,9 @@ namespace SweetsSearchPictureBook
             }
 
             itemScrollViewer.ScrollToTop();
-            if (int.Parse(jsonKeyWord.count) == 0)
-            {
-                MessageBox.Show("見つかりませんでした");
-                tbFreeWord.Text = null;
-                ItemSearch();
-                return;
-            }
-
+            ItemCount();
             ItemInfo();
+            
         }
 
         //アイテム数が0個の時
@@ -128,6 +132,8 @@ namespace SweetsSearchPictureBook
             if (int.Parse(jsonKeyWord.count) == 0)
             {
                 MessageBox.Show("見つかりませんでした");
+                cbClass.SelectedIndex = 0;
+                ItemSearch();
                 return;
             }
         }
@@ -182,7 +188,8 @@ namespace SweetsSearchPictureBook
             Button[] buttonArray = { btItemUrl_1,btItemUrl_2,btItemUrl_3,btItemUrl_4,btItemUrl_5,btItemUrl_6,
                                          btItemUrl_7,btItemUrl_8,btItemUrl_9,btItemUrl_10,btItemUrl_11,btItemUrl_12,
                                          btItemUrl_13,btItemUrl_14,btItemUrl_15,btItemUrl_16};
-            for (int i = 0; i < int.Parse(jsonKeyWord.count); i++)
+            ItemCountNum();
+            for (int i = 0; i < count; i++)
             {
                 buttonArray[i].IsEnabled = true;
             }
@@ -193,9 +200,10 @@ namespace SweetsSearchPictureBook
                                             tbItemPrice_6,tbItemPrice_7,tbItemPrice_8,tbItemPrice_9,tbItemPrice_10,
                                             tbItemPrice_11,tbItemPrice_12,tbItemPrice_13,tbItemPrice_14,tbItemPrice_15,
                                             tbItemPrice_16};
-            for (int i = 0; i < int.Parse(jsonKeyWord.count); i++)
+            ItemCountNum();
+            for (int i = 0; i < count; i++)
             {
-                tbItemPrice[i].Text = PriceCheck(i);
+                tbItemPrice[i].Text = PriceCheck(min+i);
             }
 
 
@@ -204,11 +212,12 @@ namespace SweetsSearchPictureBook
                                            tbItemName_6,tbItemName_7,tbItemName_8,tbItemName_9,tbItemName_10,
                                            tbItemName_11,tbItemName_12,tbItemName_13,tbItemName_14,tbItemName_15,
                                            tbItemName_16};
-            for (int i = 0; i < int.Parse(jsonKeyWord.count); i++)
+            ItemCountNum();
+            for (int i = 0; i < count; i++)
             {
-                tbItemName[i].Text = jsonKeyWord.item[i].name;
+                tbItemName[i].Text = jsonKeyWord.item[min + i].name;
             }
-
+            
 
             //======================お菓子の画像設定======================
 
@@ -220,44 +229,44 @@ namespace SweetsSearchPictureBook
             imageSource_7 = imageSource_8 = imageSource_9 = imageSource_10 = imageSource_11 = imageSource_12 =
             imageSource_13 = imageSource_14 = imageSource_15 = imageSource_16 = null;
 
-            try
+            BitmapImage[] imageSource = { imageSource_1, imageSource_2, imageSource_3, imageSource_4,
+                                                  imageSource_5,imageSource_6,imageSource_7,imageSource_8,
+                                                  imageSource_9,imageSource_10,imageSource_11,imageSource_12,
+                                                  imageSource_13,imageSource_14,imageSource_15,imageSource_16,};
+            ItemCountNum();
+            for (int i = 0; i < count; i++)
             {
-                imageSource_1 = new BitmapImage(new Uri(jsonKeyWord.item[0].image));
-                imageSource_2 = new BitmapImage(new Uri(jsonKeyWord.item[1].image));
-                imageSource_3 = new BitmapImage(new Uri(jsonKeyWord.item[2].image));
-                imageSource_4 = new BitmapImage(new Uri(jsonKeyWord.item[3].image));
-                imageSource_5 = new BitmapImage(new Uri(jsonKeyWord.item[4].image));
-                imageSource_6 = new BitmapImage(new Uri(jsonKeyWord.item[5].image));
-                imageSource_7 = new BitmapImage(new Uri(jsonKeyWord.item[6].image));
-                imageSource_8 = new BitmapImage(new Uri(jsonKeyWord.item[7].image));
-                imageSource_9 = new BitmapImage(new Uri(jsonKeyWord.item[8].image));
-                imageSource_10 = new BitmapImage(new Uri(jsonKeyWord.item[9].image));
-                imageSource_11 = new BitmapImage(new Uri(jsonKeyWord.item[10].image));
-                imageSource_12 = new BitmapImage(new Uri(jsonKeyWord.item[11].image));
-                imageSource_13 = new BitmapImage(new Uri(jsonKeyWord.item[12].image));
-                imageSource_14 = new BitmapImage(new Uri(jsonKeyWord.item[13].image));
-                imageSource_15 = new BitmapImage(new Uri(jsonKeyWord.item[14].image));
-                imageSource_16 = new BitmapImage(new Uri(jsonKeyWord.item[15].image));                
-            }
-            catch (Exception)
-            {
-                
-            }
-            
+                imageSource[i] = new BitmapImage(new Uri(jsonKeyWord.item[min + i].image));
+            };
+
             Image[] pbItemImage = { pbItemImage_1, pbItemImage_2, pbItemImage_3, pbItemImage_4, pbItemImage_5,
                                         pbItemImage_6,pbItemImage_7,pbItemImage_8,pbItemImage_9,pbItemImage_10,
                                         pbItemImage_11,pbItemImage_12,pbItemImage_13,pbItemImage_14,pbItemImage_15,
                                         pbItemImage_16};
-
-            BitmapImage[] imageSorce = {imageSource_1,imageSource_2,imageSource_3,imageSource_4,imageSource_5,
-                                        imageSource_6,imageSource_7,imageSource_8,imageSource_9,imageSource_10,
-                                        imageSource_11,imageSource_12,imageSource_13,imageSource_14,imageSource_15,
-                                        imageSource_16};
-
-            for (int i = 0; i < int.Parse(jsonKeyWord.count); i++)
+            ItemCountNum();
+            for (int i = 0; i < count; i++)
             {
-                pbItemImage[i].Source = imageSorce[i];
+                pbItemImage[i].Source = imageSource[i];
             }
+            NextReturnButtonCheck();
+        }
+
+        //次のページへ
+        private void nextButton_Click(object sender, RoutedEventArgs e)
+        {
+            pageCount++;
+            max += 16;
+            min += 16;
+            ItemInfo();
+        }
+
+        //前のページへ
+        private void returnButton_Click(object sender, RoutedEventArgs e)
+        {
+            pageCount--;
+            max -= 16;
+            min -= 16;
+            ItemInfo();
         }
 
         //アイテム情報クリア
@@ -288,6 +297,19 @@ namespace SweetsSearchPictureBook
             }
         }
 
+        //取得した数が16以上かどうか判定
+        public void ItemCountNum()
+        {
+            if (int.Parse(jsonKeyWord.count) > 16)
+            {
+                count = 16;
+            }
+            else
+            {
+                count = int.Parse(jsonKeyWord.count);
+            }
+        }
+
         //インフォメーションボタン(message box)
         private void Button_Infomation(object sender, RoutedEventArgs e)
         {
@@ -311,6 +333,33 @@ namespace SweetsSearchPictureBook
             itemWindow.ShowDialog();
         }
 
+        //ページ遷移ボタンのvisible判定
+        public void NextReturnButtonCheck()
+        {
+            switch (pageCount)
+            {
+                case 1:
+                    returnButton.IsEnabled = false;
+                    return;
+                case 2:
+                    returnButton.IsEnabled = true;
+                    return;
+                default:
+                    return;
+            }
+        }
+
+        //トグルボタンのチェックが外れた時
+        public void Unchecked()
+        {
+            changeNum = 0;
+            cbArea.IsEnabled = false;
+            cbArea.SelectedIndex = 0;
+            cbClass.IsEnabled = true;
+            tbFreeWord.IsEnabled = true;
+            toggleBtSort.IsEnabled = true;
+        }
+
         //地域限定トグルボタンイベント(チェック時)
         public void ToggleBtArea_Checked(object sender, RoutedEventArgs e)
         {
@@ -324,28 +373,62 @@ namespace SweetsSearchPictureBook
             toggleBtSort.IsEnabled = false;         
             cbArea.SelectedIndex = 1;
             changeNum = 1;
+            if (pageCount != 1)
+            {
+                returnButton_Click(sender, e);
+            }
             ItemSearch();
         }
 
         //地域限定トグルボタンイベント(チェック外れたとき)
         private void ToggleBtArea_Unchecked(object sender, RoutedEventArgs e)
         {
-            changeNum = 0;
-            cbArea.IsEnabled = false;
-            cbArea.SelectedIndex = 0;
-            cbClass.IsEnabled = true;
-            tbFreeWord.IsEnabled = true;
-            toggleBtSort.IsEnabled = true;
-
+            Unchecked();
+            if (pageCount != 1)
+            {
+                returnButton_Click(sender, e);
+            }
             ItemSearch();
         }
 
         //並び替えトグルボタンイベント(チェック時)
         private void ToggleBtSort_Checked(object sender, RoutedEventArgs e)
         {
+            if (pageCount != 1)
+            {
+                returnButton_Click(sender, e);
+            }           
             Search_Click(sender,e);
         }
 
+        //並び替えトグルボタンイベント(チェック外れたとき)
+        private void toggleBtSort_Unchecked(object sender, RoutedEventArgs e)
+        {
+            Unchecked();
+            if (pageCount != 1)
+            {
+                returnButton_Click(sender, e);
+            }
+            ItemSearch();
+        }
+
+        //ジャンルコンボボックス変更時
+        private void cbClass_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (checkNumber != 0)
+            {
+                ItemSearch();
+            }
+        }
+
+        //地域限定コンボボックス変更時
+        private void cbArea_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (toggleBtArea.IsChecked == true && changeNum == 1)
+            {
+                ItemSearch();
+            }
+        }
 
         private void BtItemUrl1_Click(object sender, RoutedEventArgs e)
         {
@@ -425,24 +508,6 @@ namespace SweetsSearchPictureBook
         private void BtItemUrl16_Click(object sender, RoutedEventArgs e)
         {
             ItemWindowShow(15);
-        }
-
-        private void cbClass_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (checkNumber != 0)
-            {
-                ItemSearch();
-            }   
-        }
-
-        private void cbArea_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {         
-            if (toggleBtArea.IsChecked == true && changeNum == 1)
-            {
-                ItemSearch();
-            }
-        }
-
-        
+        }       
     }
 }

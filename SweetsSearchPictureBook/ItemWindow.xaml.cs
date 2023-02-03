@@ -74,6 +74,10 @@ namespace SweetsSearchPictureBook
         //アイテム情報
         public void ItemInfo()
         {
+            if (Window1.pageCount == 2)
+            {
+                num += 16;
+            }
             url = jsonKeyWord.item[num].image;
             BitmapImage imageSource = new BitmapImage(new Uri(url));
             itemImage.Source = imageSource;
