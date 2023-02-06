@@ -77,6 +77,9 @@ namespace SweetsSearchPictureBook
             if (Window1.pageCount == 2)
             {
                 num += 16;
+            }else if (Window1.pageCount == 3)
+            {
+                num += 32;
             }
             url = jsonKeyWord.item[num].image;
             BitmapImage imageSource = new BitmapImage(new Uri(url));

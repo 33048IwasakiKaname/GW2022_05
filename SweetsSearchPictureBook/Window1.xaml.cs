@@ -23,7 +23,7 @@ namespace SweetsSearchPictureBook
     /// </summary>
     public partial class Window1 : Window
     {
-        public string url = "https://www.sysbird.jp/webapi/?apikey=guest&format=json&max=32";
+        public string url = "https://www.sysbird.jp/webapi/?apikey=guest&format=json&max=";
 
         public WebClient wc = new WebClient();
         public static Rootobject jsonKeyWord = new Rootobject();
@@ -37,15 +37,19 @@ namespace SweetsSearchPictureBook
         public int min = 0; //jsonのmin値
         public int max = 16; //jsonのmax値
         public static int pageCount = 1; //現在のページ番号
-        public int itemMax = 32;
+        public int itemMax = 64; //最大取得数
         public int count = 0; //アイテムが16個以上かどうかで使用する値
+        public int printCount = 16; //表示できる最大個数
+        public const int page_1num = 16;
+        public const int page_2num = 32;
+        public const int page_3num = 48;
 
         //ウィンドウロード時
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             checkNumber = 1;
             cbArea.IsEnabled = false;
-            keyWord = wc.DownloadString(url);
+            keyWord = wc.DownloadString(url + itemMax);
             keyWord = keyWord.Replace("\"type\":{}", "\"type\":\"データなし\"");
             jsonKeyWord = JsonConvert.DeserializeObject<Rootobject>(keyWord);
             ItemInfo();
@@ -70,8 +74,8 @@ namespace SweetsSearchPictureBook
         public void ItemSearch()
         {
             Clear();
-            itemScrollViewer.ScrollToTop();
-            newUrl = url + "&keyword=" + tbFreeWord.Text + "&type=" + cbClass.SelectedIndex;
+
+            newUrl = url + itemMax + "&keyword=" + tbFreeWord.Text + "&type=" + cbClass.SelectedIndex;
             if (toggleBtSort.IsChecked == true && toggleBtArea.IsChecked == false)
             {
                 newUrl += "&order=r";
@@ -254,18 +258,20 @@ namespace SweetsSearchPictureBook
         //次のページへ
         private void nextButton_Click(object sender, RoutedEventArgs e)
         {
+            itemScrollViewer.ScrollToTop();
             pageCount++;
-            max += 16;
-            min += 16;
+            max += printCount;
+            min += printCount;
             ItemInfo();
         }
 
         //前のページへ
         private void returnButton_Click(object sender, RoutedEventArgs e)
         {
+            itemScrollViewer.ScrollToTop();
             pageCount--;
-            max -= 16;
-            min -= 16;
+            max -= printCount;
+            min -= printCount;
             ItemInfo();
         }
 
@@ -300,13 +306,15 @@ namespace SweetsSearchPictureBook
         //取得した数が16以上かどうか判定
         public void ItemCountNum()
         {
-            if (int.Parse(jsonKeyWord.count) > 16)
+            if (int.Parse(jsonKeyWord.count) > page_1num)
             {
                 count = 16;
+                nextButton.IsEnabled = true;
             }
             else
             {
                 count = int.Parse(jsonKeyWord.count);
+                nextButton.IsEnabled = false;
             }
         }
 
