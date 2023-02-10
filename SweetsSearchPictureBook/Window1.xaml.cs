@@ -37,12 +37,14 @@ namespace SweetsSearchPictureBook
         public int min = 0; //jsonのmin値
         public int max = 16; //jsonのmax値
         public static int pageCount = 1; //現在のページ番号
-        public int itemMax = 64; //最大取得数
+        public int itemMax = 80; //最大取得数
         public int count = 0; //アイテムが16個以上かどうかで使用する値
         public int printCount = 16; //表示できる最大個数
         public const int page_1num = 16;
         public const int page_2num = 32;
         public const int page_3num = 48;
+        public const int page_4num = 64;
+        public const int page_5num = 80;
 
         //ウィンドウロード時
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -62,17 +64,14 @@ namespace SweetsSearchPictureBook
 
         //検索ボタンクリック
         public void Search_Click(object sender, RoutedEventArgs e)
-        {
-            if (pageCount != 1)
-            {
-                returnButton_Click(sender, e);
-            }
+        {           
             ItemSearch();
         }
 
         //検索処理
         public void ItemSearch()
         {
+            ReturnFirstPage();
             Clear();
 
             newUrl = url + itemMax + "&keyword=" + tbFreeWord.Text + "&type=" + cbClass.SelectedIndex;
@@ -84,7 +83,7 @@ namespace SweetsSearchPictureBook
             {
                 if (cbArea.SelectedIndex != 0)
                 {
-                    var a = cbArea.SelectedItem.ToString();
+                    string a = cbArea.SelectedItem.ToString();
                     a = a.Replace("System.Windows.Controls.ComboBoxItem:","");
                     newUrl = newUrl + "&type=99" + "&keyword=" + a;
                 }
@@ -137,6 +136,7 @@ namespace SweetsSearchPictureBook
             {
                 MessageBox.Show("見つかりませんでした");
                 cbClass.SelectedIndex = 0;
+                tbFreeWord.Text = null;
                 ItemSearch();
                 return;
             }
@@ -149,8 +149,6 @@ namespace SweetsSearchPictureBook
             tbItemName_1.Text = json.item.name.ToString();
             BitmapImage imageSource_17 = new BitmapImage(new Uri(json.item.image));
             pbItemImage_1.Source = imageSource_17;
-
-            var a = json.item.price.ToString();
 
             if (json.item.price.ToString() != "{}")
             {
@@ -177,7 +175,7 @@ namespace SweetsSearchPictureBook
                 else
                 {
                     return "データなし";
-                }              
+                }
             }
             else
             {
@@ -188,6 +186,7 @@ namespace SweetsSearchPictureBook
         //アイテム情報
         public void ItemInfo()
         {
+            Clear();
             //======================お菓子のボタン設定======================
             Button[] buttonArray = { btItemUrl_1,btItemUrl_2,btItemUrl_3,btItemUrl_4,btItemUrl_5,btItemUrl_6,
                                          btItemUrl_7,btItemUrl_8,btItemUrl_9,btItemUrl_10,btItemUrl_11,btItemUrl_12,
@@ -207,7 +206,7 @@ namespace SweetsSearchPictureBook
             ItemCountNum();
             for (int i = 0; i < count; i++)
             {
-                tbItemPrice[i].Text = PriceCheck(min+i);
+                tbItemPrice[i].Text = PriceCheck(min + i);
             }
 
 
@@ -240,6 +239,10 @@ namespace SweetsSearchPictureBook
             ItemCountNum();
             for (int i = 0; i < count; i++)
             {
+                if (jsonKeyWord.item[min + i].image == null)
+                {
+                    jsonKeyWord.item[min + i].image = "https://www.shoshinsha-design.com/wp-content/uploads/2020/05/noimage-760x460.png";
+                }
                 imageSource[i] = new BitmapImage(new Uri(jsonKeyWord.item[min + i].image));
             };
 
@@ -255,9 +258,18 @@ namespace SweetsSearchPictureBook
             NextReturnButtonCheck();
         }
 
-        //次のページへ
-        private void nextButton_Click(object sender, RoutedEventArgs e)
+        //1ページ目に戻る
+        public void ReturnFirstPage()
         {
+            pageCount = 1;
+            min = 0;
+            max = 16;
+        }
+
+        //次のページへ
+        private void NextButton_Click(object sender, RoutedEventArgs e)
+        {
+            
             itemScrollViewer.ScrollToTop();
             pageCount++;
             max += printCount;
@@ -266,7 +278,7 @@ namespace SweetsSearchPictureBook
         }
 
         //前のページへ
-        private void returnButton_Click(object sender, RoutedEventArgs e)
+        private void ReturnButton_Click(object sender, RoutedEventArgs e)
         {
             itemScrollViewer.ScrollToTop();
             pageCount--;
@@ -306,16 +318,34 @@ namespace SweetsSearchPictureBook
         //取得した数が16以上かどうか判定
         public void ItemCountNum()
         {
-            if (int.Parse(jsonKeyWord.count) > page_1num)
+            switch (pageCount)
             {
-                count = 16;
-                nextButton.IsEnabled = true;
+                case 1:
+                    if (int.Parse(jsonKeyWord.count) > page_1num)
+                    {
+                        count = page_1num;
+                        nextButton.IsEnabled = true;
+                    }
+                    else
+                    {
+                        count = int.Parse(jsonKeyWord.count);
+                        nextButton.IsEnabled = false;
+                    }
+                    return;
+                case 2:
+                    if (int.Parse(jsonKeyWord.count) < page_2num)
+                    {
+                        count = int.Parse(jsonKeyWord.count)-page_1num;
+                        nextButton.IsEnabled = false;
+                    }
+                    return;
+                default:
+                    return;
             }
-            else
-            {
-                count = int.Parse(jsonKeyWord.count);
-                nextButton.IsEnabled = false;
-            }
+
+            
+
+            
         }
 
         //インフォメーションボタン(message box)
@@ -352,6 +382,9 @@ namespace SweetsSearchPictureBook
                 case 2:
                     returnButton.IsEnabled = true;
                     return;
+                case 5:
+                    nextButton.IsEnabled = false;
+                    return;
                 default:
                     return;
             }
@@ -383,7 +416,7 @@ namespace SweetsSearchPictureBook
             changeNum = 1;
             if (pageCount != 1)
             {
-                returnButton_Click(sender, e);
+                ReturnButton_Click(sender, e);
             }
             ItemSearch();
         }
@@ -394,7 +427,7 @@ namespace SweetsSearchPictureBook
             Unchecked();
             if (pageCount != 1)
             {
-                returnButton_Click(sender, e);
+                ReturnButton_Click(sender, e);
             }
             ItemSearch();
         }
@@ -404,7 +437,7 @@ namespace SweetsSearchPictureBook
         {
             if (pageCount != 1)
             {
-                returnButton_Click(sender, e);
+                ReturnButton_Click(sender, e);
             }           
             Search_Click(sender,e);
         }
@@ -415,7 +448,7 @@ namespace SweetsSearchPictureBook
             Unchecked();
             if (pageCount != 1)
             {
-                returnButton_Click(sender, e);
+                ReturnButton_Click(sender, e);
             }
             ItemSearch();
         }

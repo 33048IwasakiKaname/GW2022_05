@@ -74,12 +74,26 @@ namespace SweetsSearchPictureBook
         //アイテム情報
         public void ItemInfo()
         {
-            if (Window1.pageCount == 2)
+            switch (Window1.pageCount)
             {
-                num += 16;
-            }else if (Window1.pageCount == 3)
+                case 2:
+                    num += 16;
+                    break;
+                case 3:
+                    num += 32;
+                    break;
+                case 4:
+                    num += 48;
+                    break;
+                case 5:
+                    num += 64;
+                    break;
+                default:
+                    break;
+            }
+            if (jsonKeyWord.item[num].image == null)
             {
-                num += 32;
+                jsonKeyWord.item[num].image = "https://www.shoshinsha-design.com/wp-content/uploads/2020/05/noimage-760x460.png";
             }
             url = jsonKeyWord.item[num].image;
             BitmapImage imageSource = new BitmapImage(new Uri(url));
