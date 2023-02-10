@@ -15,6 +15,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.IO;
 
 namespace SweetsSearchPictureBook
 {
@@ -22,7 +23,7 @@ namespace SweetsSearchPictureBook
     /// Window1.xaml の相互作用ロジック
     /// </summary>
     public partial class Window1 : Window
-    {
+    {        
         public string url = "https://www.sysbird.jp/webapi/?apikey=guest&format=json&max=";
 
         public WebClient wc = new WebClient();
@@ -187,6 +188,7 @@ namespace SweetsSearchPictureBook
         public void ItemInfo()
         {
             Clear();
+            NextReturnButtonCheck();
             //======================お菓子のボタン設定======================
             Button[] buttonArray = { btItemUrl_1,btItemUrl_2,btItemUrl_3,btItemUrl_4,btItemUrl_5,btItemUrl_6,
                                          btItemUrl_7,btItemUrl_8,btItemUrl_9,btItemUrl_10,btItemUrl_11,btItemUrl_12,
@@ -255,7 +257,7 @@ namespace SweetsSearchPictureBook
             {
                 pbItemImage[i].Source = imageSource[i];
             }
-            NextReturnButtonCheck();
+            
         }
 
         //1ページ目に戻る
@@ -315,7 +317,7 @@ namespace SweetsSearchPictureBook
             }
         }
 
-        //取得した数が16以上かどうか判定
+        //取得したjsonの数がいくつか判定
         public void ItemCountNum()
         {
             switch (pageCount)
@@ -339,6 +341,28 @@ namespace SweetsSearchPictureBook
                         nextButton.IsEnabled = false;
                     }
                     return;
+                case 3:
+                    if (int.Parse(jsonKeyWord.count) < page_3num)
+                    {
+                        count = int.Parse(jsonKeyWord.count) - page_2num;
+                        nextButton.IsEnabled = false;
+                    }
+                    return;
+                case 4:
+                    if (int.Parse(jsonKeyWord.count) < page_4num)
+                    {
+                        count = int.Parse(jsonKeyWord.count) - page_3num;
+                        nextButton.IsEnabled = false;
+                    }
+                    return;
+                case 5:
+                    if (int.Parse(jsonKeyWord.count) < page_5num)
+                    {
+                        count = int.Parse(jsonKeyWord.count) - page_4num;
+                        nextButton.IsEnabled = false;
+                    }
+                    return;
+
                 default:
                     return;
             }
@@ -382,10 +406,17 @@ namespace SweetsSearchPictureBook
                 case 2:
                     returnButton.IsEnabled = true;
                     return;
+                case 3:
+                    nextButton.IsEnabled = true;
+                    return;
+                case 4:
+                    nextButton.IsEnabled = true;
+                    return;
                 case 5:
                     nextButton.IsEnabled = false;
                     return;
                 default:
+                    returnButton.IsEnabled = true;
                     return;
             }
         }
