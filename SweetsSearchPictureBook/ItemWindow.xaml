@@ -19,10 +19,9 @@
         <Label Name="itemType" Content="チョコレート" HorizontalAlignment="Left" Margin="130,138,0,0" VerticalAlignment="Top" FontSize="20"/>
         <Label Name="itemPrice" Content="100円" HorizontalAlignment="Left" Margin="130,203,0,0" VerticalAlignment="Top" FontSize="20" RenderTransformOrigin="0.919,0.395"/>
         <TextBlock x:Name="itemTag" Text=" グミ,チョコ" HorizontalAlignment="Left" Margin="130,238,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="20" Width="285" Height="63"/>
-        <TextBlock Name="snackName" Text="お菓子の名前" HorizontalAlignment="Center" Margin="16,10,242,169" TextWrapping="Wrap"
-                   VerticalAlignment="Center" FontSize="27" Height="122" Width="295" Background="#FFFFDAC5" TextAlignment="Center"/>
-        <Button x:Name="buttonCloseItemWin" Content="閉じる" HorizontalAlignment="Left" Margin="463,264,0,0" VerticalAlignment="Top"
-                Width="68" Height="27" Click="ButtonCloseItemWin_Click" Background="#FFEEB984" BorderBrush="Black" BorderThickness="1"/>
+        <TextBlock Name="snackName" Text="お菓子の名前" Margin="16,10,0,0" TextWrapping="Wrap"
+                   VerticalAlignment="Top" FontSize="27" Height="122" Background="#FFFFDAC5" TextAlignment="Center" HorizontalAlignment="Left" Width="295"/>
+        <Button x:Name="buttonCloseItemWin" Content="閉じる" Margin="463,264,0,0" Height="27" Click="ButtonCloseItemWin_Click" Background="#FFEEB984" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Width="68" VerticalAlignment="Top"/>
 
 
 
